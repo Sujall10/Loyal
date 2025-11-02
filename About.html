@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thakur Pan & Soda - About us</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Custom color palette matching the dark theme of the original site
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Keeping Inter but relying on bold/tracking adjustments
+                    },
+                    colors: {
+                        'background': '#1a1a1a', // Deep dark background
+                        'text-primary': '#f5e9d9', // Creamy white text
+                        'text-secondary': '#c99d66', // Gold/Bronze accent for headings
+                        'border-color': '#333333', // Subtle dark border
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; 
+            color: #E5E7EB; 
+            overflow-x: hidden; 
+            /* Cursor needs to be hidden for the custom cursor to take over */
+            cursor: none; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom border for section dividers */
+        .section-divider {
+            border-bottom: 1px solid #333333;
+        }
+
+        /* --- Scroll Animation Classes (Fade/Slide Up) --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Using a common Framer/ease-out cubic bezier curve for smoother animation */
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .animate-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Parallax Container and Element Styles --- */
+        .parallax-container {
+            overflow: hidden;
+        }
+        .parallax-element {
+            transition: transform 0.1s linear;
+        }
+        
+        /* Image container sizing to match original visual weight */
+        .image-container {
+            height: 70vh; 
+        }
+
+        .text-hero {
+            /* Adjusted clamp for slightly larger feel on desktop */
+            font-size: clamp(3rem, 11vw, 8.5rem); 
+            line-height: 1.1;
+        }
+        /* Style for the welcome section paragraph */
+        .text-welcome {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            line-height: 1.3;
+        }
+        .text-story-lg {
+            font-size: 2.1rem;
+            line-height: 1.2;
+        }
+        .scroll-section {
+            /* Increased duration for smoother sticky animation */
+            min-height: 280vh; 
+        }
+        .sticky-content {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        img {
+            border-radius: 0.75rem;
+            object-fit: cover;
+        }
+        
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #B4A066; /* Accent color */
+            mix-blend-mode: soft-light; 
+            z-index: 9999;
+            opacity: 0.8;
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        height 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        opacity 0.3s ease-in-out;
+        }
+
+        /* Menu item hover effect and grid layout for desktop */
+        
+    </style>
+</head>
+<body class="antialiased">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0A0A0A',
+                        'accent': '#B4A066', /* Faux velvet/gold accent */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 1. Header/Navigation - Sticky and Minimal -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">THAKUR PAN</a>
+            <nav class="space-x-4 flex items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section - Large Split Typography -->
+    <section class="min-h-screen pt-24 pb-24 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Increased gap for the intro paragraphs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+                <p class="text-lg text-text-primary animate-on-scroll">
+                    Premium paans. Designer drinks. Luxe vibes. All at Akshar Chowk, Vadodara.
+                </p>
+                <p class="text-lg text-text-primary animate-on-scroll" data-delay="100">
+                    Paan that pops, mocktails that chill, coffee that vibes, waffles that wow. Step in, shoot a reel, and taste the trend.
+                </p>
+            </div>
+
+            <!-- Tighter tracking and higher weight for display font fidelity -->
+            <h1 class="text-6xl sm:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200">
+  Vadodara’s premium <span class="italic">paan & soda</span>  <br>bar&mdash; where taste meets trend.
+</h1>
+
+
+        </div>
+    </section>
+
+    <!-- 3. Short Story Section - Two-Column Text -->
+    <section class="py-32 md:py-40 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <h2 class="text-sm tracking-widest font-bold text-text-secondary mb-16 animate-on-scroll">
+                02// SHORT STORY
+            </h2>
+
+            <!-- Tighter tracking for this title as well -->
+            <h3 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-text-primary mb-32 max-w-4xl animate-on-scroll" data-delay="100">
+                Since 1994, in the vibrant streets of Akshar Chowk, <span class="italic">Thakur Pan</span> has been crafting moments that taste like memories.
+            </h3>
+
+            <!-- Body Text - Two Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 text-xl leading-relaxed">
+                <!-- Left Column -->
+                <div class="space-y-12">
+                    <p class="animate-on-scroll" data-delay="200">
+                        In 1994, amidst the vibrant crossroads of Akshar Chowk, a humble idea took shape — to serve not just paan, but moments of flavor and connection.
+What began as a small family venture soon became a local legend, drawing people from every corner of Vadodara to experience something refreshingly different.
+                    </p>
+                    <p class="animate-on-scroll" data-delay="300">
+                        Founded by 3 brothers with a passion for authentic taste and heartfelt service, Thakur Pan & Soda wasn’t just about satisfying cravings — it was about creating memories, one sip and smile at a time.
+                    </p>
+                    <p class="animate-on-scroll" data-delay="400">
+                        Over the years, the name Thakur Pan became synonymous with premium taste, youthful energy, and timeless charm.
+Today, it stands as more than just a Shop — it’s a cultural icon, where tradition meets trend, and every flavor tells a story worth sharing.
+                    </p>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="space-y-12">
+                    <p class="animate-on-scroll" data-delay="500">
+                        Today, Thakur Pan & Soda continues to captivate Vadodara with its perfect blend of heritage and innovation.
+The passion that began in 1994 still thrives — reimagined for a new generation that craves both authenticity and trend.
+                    </p>
+                    <p class="animate-on-scroll" data-delay="600">
+                        Each creation, from signature paans to artisanal mocktails, carries the same spirit of artistry, connection, and celebration.
+Locals and travelers alike are drawn to its warm ambiance and premium feel — where the charm of tradition meets the pulse of modern culture.
+                    </p>
+                    <p class="animate-on-scroll" data-delay="700">
+                       Through changing times and generations, one thing remains unchanged — the warmth, the flavor, and the feeling that every visit is something to remember.
+At its heart, Thakur Pan & Soda will always be what it was meant to be — a place where stories begin, friendships deepen, and every sip is a celebration.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. Split Image Section 1 with Enhanced Parallax Effect -->
+    <section class="py-12 section-divider parallax-container">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 image-container">
+                <!-- Image 1 (Smoky Cocktail) - Left -->
+                <div class="rounded-xl overflow-hidden animate-on-scroll">
+                    <!-- Increased parallax speed to 0.1 for more noticeable movement -->
+                    <img src="about_img\WhatsApp Image 2025-11-02 at 15.46.09_62467ed8.jpg" 
+                         alt="Smoky iced cocktail in a patterned glass" 
+                         class="w-full h-full object-cover parallax-element" data-parallax-speed="0.5">
+                </div>
+
+                <!-- Image 2 (Bar Exterior) - Right -->
+                <div class="rounded-xl overflow-hidden animate-on-scroll" data-delay="100">
+                    <img src="about_img\WhatsApp Image 2025-11-02 at 16.06.57_529cdfc0.jpg" 
+                         alt="Exterior bar seating with tall chairs" 
+                         class="w-full h-full object-cover parallax-element" data-parallax-speed="0.5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Split Image Section 2 (Standard Reveal) -->
+    <section class="py-12 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 image-container">
+                <!-- Image 3 (Flower Detail - Left) -->
+                <div class="rounded-xl overflow-hidden animate-on-scroll" data-delay="100">
+                    <img src="about_img\WhatsApp Image 2025-11-02 at 17.01.03_58bc27f5.jpg" 
+                         alt="Close-up of an orange and white flower" 
+                         class="w-full h-full object-cover parallax-element" data-parallax-speed="0.5">
+                </div>
+
+                <!-- Image 4 (Bar Reflection - Right) -->
+                <div class="rounded-xl overflow-hidden animate-on-scroll">
+                    <img src="about_img\WhatsApp Image 2025-11-02 at 03.48.40_626aa460.jpg" 
+                         alt="Reflection on the bar's glass window" 
+                         class="w-full h-full object-cover parallax-element" data-parallax-speed="0.5">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. Numbers Section - All Four Metrics -->
+    <section class="py-32 md:py-40 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <h2 class="text-sm tracking-widest font-bold text-text-secondary mb-16 pt-2 pb-6 animate-on-scroll">
+                03// THAKUR PAN IN NUMBERS
+            </h2>
+
+            <!-- Metric 1: Year Opened -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-10 section-divider">
+                <p class="text-2xl font-medium text-text-primary animate-on-scroll">Magical year we opened Thakur Pan</p>
+                <p class="text-7xl sm:text-9xl font-extrabold text-right tracking-tighter text-text-primary animate-on-scroll" data-delay="100">1994</p>
+            </div>
+
+            <!-- Metric 2: Satisfaction Rate -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-10 section-divider">
+                <p class="text-2xl font-medium text-text-primary animate-on-scroll" data-delay="200">Customer satisfaction rate</p>
+                <p class="text-7xl sm:text-9xl font-extrabold text-right tracking-tighter text-text-primary animate-on-scroll" data-delay="300">99.9%</p>
+            </div>
+            
+             <!-- Metric 3: Mixology Specialists -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-10 section-divider">
+                <p class="text-2xl font-medium text-text-primary animate-on-scroll" data-delay="400">Varieties in Soda & Mocktails</p>
+                <p class="text-7xl sm:text-9xl font-extrabold text-right tracking-tighter text-text-primary animate-on-scroll" data-delay="500">51+</p>
+            </div>
+            
+            <!-- Metric 4: Inspiring Location -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-10">
+                <p class="text-2xl font-medium text-text-primary animate-on-scroll" data-delay="600">Amazing and inspiring location</p>
+                <p class="text-7xl sm:text-9xl font-extrabold text-right tracking-tighter text-text-primary animate-on-scroll" data-delay="700">1</p>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- 7. Team Section - Grid of 8 Members -->
+    <section class="py-32 md:py-40 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <h2 class="text-sm tracking-widest font-bold text-text-secondary mb-16 animate-on-scroll">
+                04// TEAM
+            </h2>
+            
+            <!-- Tighter tracking for this title as well -->
+            <h3 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-text-primary mb-32 max-w-4xl animate-on-scroll" data-delay="100">
+                The faces behind Thakur Pan & Soda
+                <!-- Meet the most skilled paan mixologists in town -->
+            </h3>
+
+            <!-- Team Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-16">
+                <!-- Team Member 1 -->
+                <div class="animate-on-scroll" data-delay="200">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="about_img\WhatsApp Image 2025-11-02 at 17.19.25_c8c04347.jpg" alt="John Smith" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Rajesh Rajput</h4>
+                    <!-- <p class="text-base text-gray-400">Proin faucibus arcu quis ante. Sed libero. Etiam feugiat lorem non metus. Integer ante arcu.</p> -->
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="animate-on-scroll" data-delay="300">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="about_img\WhatsApp Image 2025-11-02 at 17.28.20_93d942ae.jpg" alt="Alicia Keys" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Rajendra Rajput</h4>
+                    <!-- <p class="text-base text-gray-400">Creative thinker with bold ideas. Works hard. Always focused on goals and results. A real asset to any team.</p> -->
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="animate-on-scroll" data-delay="400">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="about_img\WhatsApp Image 2025-11-02 at 17.23.02_4af7c999.jpg" alt="Jack Johnson" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Sandeep Rajput</h4>
+                    <!-- <p class="text-base text-gray-400">Brings sharp focus to each task. Works smart. Always calm and ready to adapt. Trusted by the whole team.</p> -->
+                </div>
+                
+                 <!-- Team Member 4 -->
+                <!-- <div class="animate-on-scroll" data-delay="500">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="https://placehold.co/400x400/333333/c99d66?text=PAM" alt="Pam Halpert" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Pam Halpert</h4>
+                    <p class="text-base text-gray-400">Proin faucibus arcu quis ante. Sed libero. Etiam feugiat lorem non metus.</p>
+                </div> -->
+                
+                 <!-- Team Member 5 -->
+                <div class="animate-on-scroll" data-delay="600">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="https://placehold.co/400x400/333333/c99d66?text=BOB" alt="Bob Seinfeld" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Bob Seinfeld</h4>
+                    <p class="text-base text-gray-400">Always ready to solve new problems. Thinks clearly.</p>
+                </div>
+                
+                 <!-- Team Member 6 -->
+                <div class="animate-on-scroll" data-delay="700">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="https://placehold.co/400x400/333333/c99d66?text=JAN" alt="Jan Levinson" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Jan Levinson</h4>
+                    <p class="text-base text-gray-400">Writes efficient and clean code always. Stays focused.</p>
+                </div>
+                
+                 <!-- Team Member 7 -->
+                <div class="animate-on-scroll" data-delay="800">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="https://placehold.co/400x400/333333/c99d66?text=PEDRO" alt="Pedro Gomez" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Pedro Gomez</h4>
+                    <p class="text-base text-gray-400">Creative ideas flow from his mind. Acts fast. Delivers value with every task.</p>
+                </div>
+                
+                 <!-- Team Member 8 -->
+                <div class="animate-on-scroll" data-delay="900">
+                    <div class="w-full h-auto aspect-square overflow-hidden rounded-xl mb-4">
+                        <img src="https://placehold.co/400x400/333333/c99d66?text=MICHAEL" alt="Michael Scott" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-text-primary mb-1">Michael Scott</h4>
+                    <p class="text-base text-gray-400">Leads the way with enthusiasm. Always ready to motivate the team.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 8. FAQ Section - Accordion -->
+    <section class="py-32 md:py-40 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-sm tracking-widest font-bold text-text-secondary mb-16 animate-on-scroll">
+                05// FAQ
+            </h2>
+
+            <!-- Accordion Items Container -->
+            <div class="space-y-0" id="faq-accordion">
+                
+                <!-- FAQ Item 1 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>What are Velvet Shaker’s opening hours?</span>
+                        <!-- Using inline SVG for '+' icon to ensure exact centering and style -->
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Our hours are Tuesday to Saturday, 6 PM - 1 AM. We are closed on Sundays and Mondays.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 2 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="100">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Where is Velvet Shaker located?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>We are located in the heart of Lan Kwai Fong, Hong Kong. Full address available on the contact page.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="200">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Do you take reservations?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Yes, reservations are highly recommended, especially on weekends. You can book a table via our contact page.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 4 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="300">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>What kind of drinks does Velvet Shaker serve?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>We specialize in bespoke and classic cocktails, alongside a curated selection of fine wines and spirits.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 5 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="400">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Do you have non-alcoholic drinks?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Absolutely. Our mixologists craft a variety of innovative and delicious non-alcoholic cocktails.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 6 -->
+                <details class="accordion-item py-6 animate-on-scroll" data-delay="500">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Does Velvet Shaker host private events?</span>
+                         <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Yes, our venue is available for private events and parties. Please contact us for details and packages.</p>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section id="happenings" class="py-32 bg-primary-dark">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <p class="text-gray-600 font-light mb-16">05// WHAT'S HAPPENING</p>
+                <h2 class="text-4xl font-bold text-white mb-16 translate-y-10" data-scroll-anim="list-item">
+                    Check what's happening
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Event 1: Wine Tasting -->
+                    <div class="blog-card translate-y-10" data-scroll-anim="card-item">
+                        <img class="w-full h-48 object-cover mb-4" 
+                             src="uploaded:image_ffd064.jpg-df1f0e1f-a921-4218-82b0-df0d104a16b2" 
+                             alt="Wine Tasting" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/6A0DAD/FFFFFF?text=Image+Load+Error';"
+                        />
+                        <h4 class="text-xl font-semibold text-white mb-1">Wine tasting</h4>
+                        <p class="text-sm text-gray-500 mb-3">Dec 11, 2024</p>
+                        <p class="text-gray-400 mb-4">A mellow evening of curated wines and ambient vibes.</p>
+                        <a href="#" class="text-accent hover:underline text-sm font-medium">&gt; read more</a>
+                    </div>
+
+                    <!-- Event 2: When in Hong Kong -->
+                    <div class="blog-card translate-y-10" data-scroll-anim="card-item">
+                        <img class="w-full h-48 object-cover mb-4" 
+                             src="uploaded:image_ffd043.jpg-67722d34-2031-4503-9576-9f2d15d1e1fb" 
+                             alt="Hong Kong Night" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/8B0000/FFFFFF?text=Image+Load+Error';"
+                        />
+                        <h4 class="text-xl font-semibold text-white mb-1">When in Hong Kong</h4>
+                        <p class="text-sm text-gray-500 mb-3">Dec 20, 2024</p>
+                        <p class="text-gray-400 mb-4">A visual and flavor trip inspired by the neon nights of Hong Kong.</p>
+                        <a href="#" class="text-accent hover:underline text-sm font-medium">&gt; read more</a>
+                    </div>
+
+                    <!-- Event 3: New menu testing -->
+                    <div class="blog-card translate-y-10" data-scroll-anim="card-item">
+                        <img class="w-full h-48 object-cover mb-4" 
+                             src="uploaded:image_ffd0bf.jpg-5fa0251c-77f0-48a4-a879-cc88f5cbe97c"
+                             alt="New Menu" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/4B0082/FFFFFF?text=Image+Load+Error';"
+                        />
+                        <h4 class="text-xl font-semibold text-white mb-1">New menu testing</h4>
+                        <p class="text-sm text-gray-500 mb-3">Nov 30, 2024</p>
+                        <p class="text-gray-400 mb-4">A preview night of what's next—fresh drinks, honest feedback.</p>
+                        <a href="#" class="text-accent hover:underline text-sm font-medium">&gt; read more</a>
+                    </div>
+
+                    <!-- Event 4: Banana week -->
+                    <div class="blog-card translate-y-10" data-scroll-anim="card-item">
+                        <img class="w-full h-48 object-cover mb-4" 
+                             src="https://placehold.co/400x300/FFD700/000000?text=Bananas" 
+                             alt="Bananas" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/FFD700/000000?text=Image+Load+Error';"
+                        />
+                        <h4 class="text-xl font-semibold text-white mb-1">Banana week</h4>
+                        <p class="text-sm text-gray-500 mb-3">Nov 8, 2024</p>
+                        <p class="text-gray-400 mb-4">An unexpected, delightful twist on flavor, starring the humble banana.</p>
+                        <a href="#" class="text-accent hover:underline text-sm font-medium">&gt; read more</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 7. FOOTER / CONTACT (06// CONTACT) -->
+        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <p class="text-gray-600 font-light mb-16">06// CONTACT</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                    <!-- Column 1: Visit Us -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Visit us</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <p class="font-medium text-white">Velvet Shaker</p>
+                            <p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p>
+                            
+                            <p class="font-medium text-white pt-4">Opening hours</p>
+                            <p>Mon-Fri: 18:00-24:00</p>
+                            <p>Sat-Sun: 16:00-late</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Contact -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Contact</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <p class="font-medium text-white">Bookings</p>
+                            <a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a>
+
+                            <p class="font-medium text-white pt-4">Press</p>
+                            <a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a>
+
+                            <p class="font-medium text-white pt-4">Whatsapp</p>
+                            <a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Socials -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Socials</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">Instagram</a>
+                            <a href="#" class="hover:text-accent block">X (Twitter)</a>
+                            <a href="#" class="hover:text-accent block">Facebook</a>
+                            <a href="#" class="hover:text-accent block">TikTok</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Footer / Links Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">&gt; home</a>
+                            <a href="#about" class="hover:text-accent block">&gt; about</a>
+                            <a href="#contact" class="hover:text-accent block">&gt; contact</a>
+                            <a href="#menu" class="hover:text-accent block">&gt; menu</a>
+                            <a href="#" class="hover:text-accent block">&gt; gallery</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">LINKS</h4>
+                         <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#occasions" class="hover:text-accent block">&gt; faq</a>
+                            <a href="#happenings" class="hover:text-accent block">&gt; blog</a>
+                            <a href="#" class="hover:text-accent block">&gt; privacy policy</a>
+                            <a href="#" class="hover:text-accent block">&gt; accessibility</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">&gt; all pages</a>
+                            <a href="#" class="hover:text-accent block">&gt; style guide</a>
+                            <a href="#" class="hover:text-accent block">&gt; licenses</a>
+                            <a href="#" class="hover:text-accent block">&gt; buy template</a>
+                            <a href="#" class="hover:text-accent block">&gt; our website</a>
+                        </div>
+                    </div>
+                     <!-- Logo on the fourth column on desktop, moved down on mobile -->
+                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full">
+                        <h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1>
+                        <p class="text-gray-600 text-sm">see all templates</p>
+                    </div>
+                </div>
+
+
+                <!-- Copyright and final links -->
+                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
+                    <p class="text-gray-600">&copy; 2025</p>
+                </div>
+            </div>
+        </footer>
+
+
+
+    <script>
+        // --- 1. Scroll-Triggered Fade-In Animations (Intersection Observer) ---
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const delay = parseInt(target.getAttribute('data-delay') || '0', 10);
+                    
+                    setTimeout(() => {
+                        target.classList.add('in-view');
+                    }, delay);
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // --- 2. Parallax Effect (Scroll Listener) ---
+        function applyParallax() {
+            const scrollY = window.scrollY;
+
+            document.querySelectorAll('.parallax-element').forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                
+                if (centerY > -100 && centerY < window.innerHeight + 100) {
+                    // Increased speed to 0.1 for a more pronounced effect
+                    const speed = parseFloat(element.getAttribute('data-parallax-speed') || '0.1');
+                    
+                    const offsetFromCenter = centerY - (window.innerHeight / 2);
+                    const translate = -offsetFromCenter * speed; 
+                    
+                    element.style.transform = `translateY(${translate}px)`;
+                }
+            });
+        }
+        
+        // Optimize parallax effect by only running on requestAnimationFrame
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    applyParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', applyParallax);
+        window.addEventListener('resize', applyParallax);
+
+
+        // --- 3. FAQ Accordion Logic ---
+        document.querySelectorAll('.accordion-item').forEach(details => {
+            const content = details.querySelector('.accordion-content');
+
+            details.addEventListener('toggle', () => {
+                if (details.open) {
+                    // Open: Set height and close others
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    // Close: Reset max-height to 0
+                    content.style.maxHeight = '0';
+                }
+                
+                // Close other open details elements to maintain the "one open at a time" look
+                document.querySelectorAll('.accordion-item').forEach(otherDetails => {
+                    if (otherDetails !== details && otherDetails.open) {
+                        otherDetails.open = false;
+                        otherDetails.querySelector('.accordion-content').style.maxHeight = '0';
+                    }
+                });
+            });
+        });
+        
+        // Fix initial state for max-height on load
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelectorAll('.accordion-item').forEach(details => {
+                 if (details.open) {
+                     details.querySelector('.accordion-content').style.maxHeight = details.querySelector('.accordion-content').scrollHeight + 'px';
+                 }
+             });
+        });
+
+    </script>
+    <script>
+        // Global variables for Firebase setup (required by system instructions, even if unused)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+
+        // --- Custom Cursor Logic (with LERP for smooth lag) ---
+        const customCursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        const easing = 0.2; 
+
+        /**
+         * Linear interpolation function (LERP) for smooth movement.
+         */
+        function lerp(start, end, amount) {
+            return (1 - amount) * start + amount * end;
+        }
+
+        function animateCursor() {
+            currentX = lerp(currentX, mouseX, easing);
+            currentY = lerp(currentY, mouseY, easing);
+            
+            // Translate3d for hardware acceleration and centering
+            customCursor.style.transform = `translate3d(${currentX - 15}px, ${currentY - 15}px, 0)`; 
+            
+            requestAnimationFrame(animateCursor);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Add magnetic/enlarge effect to interactive elements
+        document.querySelectorAll('a, button, .menu-item, .blog-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                customCursor.style.width = '60px'; 
+                customCursor.style.height = '60px';
+                customCursor.style.opacity = '1';
+            });
+            el.addEventListener('mouseleave', () => {
+                customCursor.style.width = '30px'; 
+                customCursor.style.height = '30px';
+                customCursor.style.opacity = '0.8';
+            });
+        });
+
+        requestAnimationFrame(animateCursor);
+
+
+        // --- SCROLL ANIMATION LOGIC ---
+
+        /**
+         * Calculates the viewport progress of a given section.
+         * @param {HTMLElement} section The scroll-section element.
+         * @returns {number} Progress from 0 (start of scroll) to 1 (end of scroll).
+         */
+        function getSectionProgress(section) {
+            const viewportHeight = window.innerHeight;
+            const sectionRect = section.getBoundingClientRect();
+            const sectionHeight = section.offsetHeight;
+            
+            // Total scroll distance needed to traverse the section
+            const totalScrollDuration = sectionHeight - viewportHeight;
+            if (totalScrollDuration <= 0) return 0; 
+
+            // sectionScrollDist is how far the top of the section has traveled above the viewport
+            const sectionScrollDist = -sectionRect.top;
+            
+            let progress = sectionScrollDist / totalScrollDuration;
+            return Math.max(0, Math.min(1, progress)); 
+        }
+
+
+        /**
+         * Handles the animation for the ABOUT section (Sticky Text Fade + Image Scale).
+         */
+        function handleAboutSection(progress) {
+            const textElement = document.getElementById('about-text');
+            const imageElement = document.getElementById('about-image');
+            
+            // Text: Fades in and moves up from progress 0 to 0.1
+            const textStart = 0.0;
+            const textEnd = 0.1;
+            const textRange = textEnd - textStart;
+
+            const textProgress = Math.max(0, Math.min(1, (progress - textStart) / textRange));
+            
+            const initialY = 32; // translate-y-8
+            const currentY = initialY * (1 - textProgress);
+            const opacity = 0 + (1 * textProgress);
+            
+            textElement.style.transform = `translateY(${currentY}px)`;
+            textElement.style.opacity = opacity;
+
+            // Image: Scales down and fades in from progress 0.1 to 1.0
+            const imageStart = 0.1;
+            const imageRange = 1.0 - imageStart;
+            const imageProgress = Math.max(0, Math.min(1, (progress - imageStart) / imageRange));
+            
+            const initialScale = 1.1; 
+            const currentScale = initialScale - (initialScale - 1) * imageProgress; // Scales from 1.1 to 1
+            
+            // Image should fade from 50% opacity (darkened) to 100% (full visibility)
+            const imageOpacity = 0.5 + (0.5 * imageProgress); 
+
+            imageElement.style.transform = `scale(${currentScale})`;
+            imageElement.style.opacity = imageOpacity;
+        }
+
+
+        /**
+         * Handles simple list and card item fade-in animations on entry.
+         * This uses a simple scroll check to trigger the animation once.
+         */
+        function handleEntranceAnimations() {
+            const elements = document.querySelectorAll('[data-scroll-anim]:not([data-animated="true"])');
+            const viewportHeight = window.innerHeight;
+
+            elements.forEach((el, index) => {
+                const rect = el.getBoundingClientRect();
+                
+                // Trigger if the element is 15% visible in the viewport
+                if (rect.top < viewportHeight * 0.85) {
+                    
+                    let delay = 0;
+                    const animType = el.getAttribute('data-scroll-anim');
+
+                    if (animType === 'list-item' || animType === 'card-item') {
+                        // Staggered delay logic for siblings
+                        const parent = el.closest('#menu-list , .grid');
+                        if (parent) {
+                            const siblings = Array.from(parent.children).filter(child => child.getAttribute('data-scroll-anim') === animType);
+                            const elementIndex = siblings.indexOf(el);
+                            delay = elementIndex * 70; // 70ms stagger
+                        }
+                    } else if (animType === 'list-item-delay') {
+                        // For the two-column story text, which appears after the title
+                        const siblings = Array.from(el.parentElement.children).filter(child => child.getAttribute('data-scroll-anim') === animType);
+                        const elementIndex = siblings.indexOf(el);
+                        delay = 200 + elementIndex * 100;
+                    }
+
+                    // Apply styles
+                    setTimeout(() => {
+                         el.style.opacity = '1';
+                         el.style.transform = 'translateY(0)';
+                         el.setAttribute('data-animated', 'true');
+                    }, delay);
+                }
+            });
+        }
+
+
+        /**
+         * Main scroll handler combining all effects.
+         */
+        function handleScroll() {
+            const header = document.getElementById('header');
+            
+            // Header Shrink Effect
+            const heroHeight = window.innerHeight; 
+            if (window.scrollY > heroHeight * 0.25) {
+                header.classList.remove('h-20', 'bg-primary-dark/80');
+                header.classList.add('h-16', 'bg-primary-dark'); 
+            } else {
+                header.classList.remove('h-16', 'bg-primary-dark');
+                header.classList.add('h-20', 'bg-primary-dark/80');
+            }
+            
+            // Parallax on Hero BG
+            const heroBg = document.getElementById('hero-bg');
+            // Move background slower than foreground (scrollY / 3)
+            heroBg.style.transform = `translateY(${window.scrollY * 0.3}px) scale(1.15)`;
+
+
+            // About Section Animations
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                const progress = getSectionProgress(aboutSection);
+                handleAboutSection(progress);
+            }
+
+            // List/Card Entrance Animations
+            handleEntranceAnimations();
+        }
+
+        // Initialize animations and attach listeners
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+
+        window.onload = () => {
+             // Initial run of the scroll handler
+             handleScroll();
+        };
+
+    </script>
+</body>
+</html>

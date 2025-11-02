@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Shaker - Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; 
+            color: #E5E7EB; 
+            overflow-x: hidden; 
+            cursor: none; 
+            scroll-behavior: smooth;
+        }
+        .text-hero {
+            font-size: clamp(2rem, 6vw, 5rem); 
+            line-height: 1.1;
+        }
+        .text-welcome {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            line-height: 1.3;
+        }
+        .text-story-lg {
+            font-size: 2.1rem;
+            line-height: 1.2;
+        }
+        /* Form Field Styling */
+        input[type="text"], input[type="email"], textarea {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #27272A;
+            color: #E5E7EB;
+            padding: 1rem 0;
+            transition: border-bottom-color 0.3s;
+            width: 100%;
+            outline: none;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            border-bottom-color: #B4A066;
+        }
+        textarea {
+            resize: none;
+        }
+
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #B4A066; 
+            mix-blend-mode: soft-light; 
+            z-index: 9999;
+            opacity: 0.8;
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        height 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        opacity 0.3s ease-in-out;
+        }
+        
+        /* Unified Scroll Animation Styles for Fade-Up effect */
+        .animate-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* Class added by IntersectionObserver when in view */
+        .in-view { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0A0A0A',
+                        'accent': '#B4A066', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Header remains fixed -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">VELVET SHAKER</a>
+            <nav class="space-x-4 flex items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="h-screen flex items-center justify-center text-center bg-primary-dark relative">
+            <!-- Dark overlay to ensure text contrast -->
+            <div class="absolute inset-0 bg-black/50 z-0"></div> 
+
+            <div class="px-4 max-w-5xl relative z-10 text-white w-full">
+                
+                <div class="flex flex-col sm:flex-row justify-between w-full mb-4">
+                    <!-- Top text - Adjusted to be left-aligned on desktop -->
+                    <div class="text-lg text-gray-400 font-light tracking-widest uppercase text-left">
+                        Cocktail bar located in Vadodara, Gujarat
+                    </div>
+                    <!-- Opening Hours -->
+                    <div class="text-right text-lg font-light text-gray-400 mt-4 sm:mt-0">
+                        <p class="font-medium text-white text-xl">8:00-late</p>
+                        <p>Mon-Sun</p>
+                    </div>
+                </div>
+
+                <!-- Main Hero Title - Adjusted to be left-aligned -->
+                <h1 class="text-hero font-extrabold text-white mb-4 relative text-left">
+                    Join us in &mdash;Vadodara
+                </h1>
+                
+                <!-- Bottom links/info - Adjusted to be left-aligned -->
+                <div class="flex flex-col sm:flex-row justify-start max-w-lg text-lg font-light text-gray-400 mt-12 space-y-2 sm:space-y-0 sm:space-x-8 text-left">
+                    <a href="#" class="hover:text-accent block">&gt; bookings</a>
+                    <a href="#menu" class="hover:text-accent block">&gt; menu</a>
+                    <a href="#about" class="hover:text-accent block">&gt; about</a>
+                    <a href="#" class="hover:text-accent block">&gt; gallery</a>
+                </div>
+                
+                <!-- Spacer to push content up slightly -->
+                <div class="h-20 sm:h-32"></div>
+            </div>
+        </section>
+
+        <!-- Contact Details and Form Section -->
+        <section class="py-32">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                    
+                    <!-- Left Column: Direct Contact Details (Staggered) -->
+                    <div class="space-y-16 lg:space-y-12"> 
+                        <h2 class="text-4xl font-bold text-white mb-8 animate-fade-up" data-delay="0">Direct Contact</h2>
+
+                        <!-- Visit Us (Stagger 1) -->
+                        <div class="animate-fade-up space-y-3" data-delay="100">
+                            <h4 class="text-xl font-bold text-accent mb-4">Visit us</h4>
+                            <p class="text-lg text-gray-400">Vadodara, Gujarat, India</p>
+                            <p class="text-lg text-gray-400 pt-2">Mon-Fri: 18:00-24:00 | Sat-Sun: 16:00-late</p>
+                        </div>
+                        
+                        <!-- Bookings (Stagger 2) -->
+                        <div class="animate-fade-up space-y-3" data-delay="250">
+                            <h4 class="text-xl font-bold text-accent mb-4">Bookings</h4>
+                            <a href="mailto:bookings@velvetshaker.com" class="text-lg text-white hover:text-accent block">bookings@velvetshaker.com</a>
+                            <a href="tel:+919876543210" class="text-lg text-white hover:text-accent block">+91 98765 43210 (Whatsapp)</a>
+                        </div>
+
+                        <!-- Press & Events (Stagger 3) -->
+                        <div class="animate-fade-up space-y-3" data-delay="400">
+                            <h4 class="text-xl font-bold text-accent mb-4">Press & Events</h4>
+                            <a href="mailto:press@velvetshaker.com" class="text-lg text-gray-400 hover:text-accent">press@velvetshaker.com</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Send a Message Form (Staggered) -->
+                    <div class="pt-16 lg:pt-0">
+                        <h2 class="text-4xl font-bold text-white mb-8 animate-fade-up" data-delay="0">Send a Message</h2>
+                        <form class="space-y-8" onsubmit="handleSubmit(event)">
+                            <!-- Input 1 (Stagger 1) -->
+                            <div class="animate-fade-up" data-delay="100">
+                                <input type="text" id="name" placeholder="Your Name" required>
+                            </div>
+                            <!-- Input 2 (Stagger 2) -->
+                            <div class="animate-fade-up" data-delay="200">
+                                <input type="email" id="email" placeholder="Your Email Address" required>
+                            </div>
+                            <!-- Input 3 (Stagger 3) -->
+                            <div class="animate-fade-up" data-delay="300">
+                                <input type="text" id="subject" placeholder="Subject" required>
+                            </div>
+                            <!-- Textarea (Stagger 4) -->
+                            <div class="animate-fade-up" data-delay="400">
+                                <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <!-- Button (Stagger 5) -->
+                            <button type="submit" class="w-full sm:w-auto px-10 py-4 text-lg font-medium rounded-[30px] text-primary-dark bg-accent hover:bg-white transition duration-300 mt-4 animate-fade-up" data-delay="500">
+    Send Inquiry
+</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 md:py-40 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-sm tracking-widest font-bold text-text-secondary mb-16 animate-on-scroll">
+                05// FAQ
+            </h2>
+
+            <!-- Accordion Items Container -->
+            <div class="space-y-0" id="faq-accordion">
+                
+                <!-- FAQ Item 1 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>What are Velvet Shaker’s opening hours?</span>
+                        <!-- Using inline SVG for '+' icon to ensure exact centering and style -->
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Our hours are Tuesday to Saturday, 6 PM - 1 AM. We are closed on Sundays and Mondays.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 2 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="100">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Where is Velvet Shaker located?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>We are located in the heart of Lan Kwai Fong, Hong Kong. Full address available on the contact page.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="200">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Do you take reservations?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Yes, reservations are highly recommended, especially on weekends. You can book a table via our contact page.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 4 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="300">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>What kind of drinks does Velvet Shaker serve?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>We specialize in bespoke and classic cocktails, alongside a curated selection of fine wines and spirits.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 5 -->
+                <details class="accordion-item section-divider py-6 animate-on-scroll" data-delay="400">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Do you have non-alcoholic drinks?</span>
+                        <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Absolutely. Our mixologists craft a variety of innovative and delicious non-alcoholic cocktails.</p>
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 6 -->
+                <details class="accordion-item py-6 animate-on-scroll" data-delay="500">
+                    <summary class="flex justify-between items-center cursor-pointer text-2xl font-medium list-none">
+                        <span>Does Velvet Shaker host private events?</span>
+                         <span class="accordion-toggle-icon w-6 h-6 flex items-center justify-center text-3xl leading-none">
+                           +
+                        </span>
+                    </summary>
+                    <div class="accordion-content pt-4 pb-2 text-lg text-gray-400">
+                        <p>Yes, our venue is available for private events and parties. Please contact us for details and packages.</p>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+
+    </section>
+
+        <!-- Footer Section (Staggered) -->
+        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <p class="text-gray-600 font-light mb-16">BOOKING & CONTACT</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                    <!-- Column 1: Visit Us -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Visit us</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <p class="font-medium text-white">Velvet Shaker</p>
+                            <p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p>
+                            
+                            <p class="font-medium text-white pt-4">Opening hours</p>
+                            <p>Mon-Fri: 18:00-24:00</p>
+                            <p>Sat-Sun: 16:00-late</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Contact -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Contact</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <p class="font-medium text-white">Bookings</p>
+                            <a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a>
+
+                            <p class="font-medium text-white pt-4">Press</p>
+                            <a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a>
+
+                            <p class="font-medium text-white pt-4">Whatsapp</p>
+                            <a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Socials -->
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-6">Socials</h3>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">Instagram</a>
+                            <a href="#" class="hover:text-accent block">X (Twitter)</a>
+                            <a href="#" class="hover:text-accent block">Facebook</a>
+                            <a href="#" class="hover:text-accent block">TikTok</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Footer / Links Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">&gt; home</a>
+                            <a href="#about" class="hover:text-accent block">&gt; about</a>
+                            <a href="#contact" class="hover:text-accent block">&gt; contact</a>
+                            <a href="#menu" class="hover:text-accent block">&gt; menu</a>
+                            <a href="#" class="hover:text-accent block">&gt; gallery</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">LINKS</h4>
+                         <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#occasions" class="hover:text-accent block">&gt; faq</a>
+                            <a href="#happenings" class="hover:text-accent block">&gt; blog</a>
+                            <a href="#" class="hover:text-accent block">&gt; privacy policy</a>
+                            <a href="#" class="hover:text-accent block">&gt; accessibility</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4>
+                        <div class="text-lg text-gray-400 space-y-3">
+                            <a href="#" class="hover:text-accent block">&gt; all pages</a>
+                            <a href="#" class="hover:text-accent block">&gt; style guide</a>
+                            <a href="#" class="hover:text-accent block">&gt; licenses</a>
+                            <a href="#" class="hover:text-accent block">&gt; buy template</a>
+                            <a href="#" class="hover:text-accent block">&gt; our website</a>
+                        </div>
+                    </div>
+                     <!-- Logo on the fourth column on desktop, moved down on mobile -->
+                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full">
+                        <h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1>
+                        <p class="text-gray-600 text-sm">see all templates</p>
+                    </div>
+                </div>
+
+
+                <!-- Copyright and final links -->
+                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
+                    <p class="text-gray-600">&copy; 2025</p>
+                </div>
+            </div>
+        </footer>
+
+
+    </main>
+    
+    <div id="custom-cursor" class="custom-cursor"></div>
+
+    <script>
+        // --- Form Submit Handler ---
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            event.target.reset();
+        }
+
+        // --- Custom Cursor Logic (Consistent) ---
+        const customCursor = document.getElementById('custom-cursor');
+        let mouseX = 0; 
+        let mouseY = 0; 
+        let currentX = 0; 
+        let currentY = 0; 
+        const easing = 0.2; 
+        
+        function lerp(start, end, amount) { 
+            return (1 - amount) * start + amount * end; 
+        }
+        
+        function animateCursor() {
+            currentX = lerp(currentX, mouseX, easing); 
+            currentY = lerp(currentY, mouseY, easing);
+            customCursor.style.transform = `translate3d(${currentX - 15}px, ${currentY - 15}px, 0)`; 
+            requestAnimationFrame(animateCursor);
+        }
+        
+        window.addEventListener('mousemove', (e) => { 
+            mouseX = e.clientX; 
+            mouseY = e.clientY; 
+        });
+        
+        document.querySelectorAll('a, button, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => { 
+                customCursor.style.width = '60px'; 
+                customCursor.style.height = '60px'; 
+                customCursor.style.opacity = '1'; 
+            });
+            el.addEventListener('mouseleave', () => { 
+                customCursor.style.width = '30px'; 
+                customCursor.style.height = '30px'; 
+                customCursor.style.opacity = '0.8'; 
+            });
+        });
+        
+        requestAnimationFrame(animateCursor);
+
+        // --- Header Shrink Logic ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 100) { 
+                    header.style.height = '70px'; 
+                    header.classList.add('shadow-xl'); 
+                } else { 
+                    header.style.height = '80px'; 
+                    header.classList.remove('shadow-xl'); 
+                }
+            }
+        });
+
+        // --- Intersection Observer Logic for Staggered Fade-In ---
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const delay = parseInt(target.getAttribute('data-delay') || '0', 10);
+                    
+                    setTimeout(() => {
+                        target.classList.add('in-view');
+                    }, delay);
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-fade-up').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+    
+</body>
+</html>

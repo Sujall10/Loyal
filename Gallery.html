@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Shaker - Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; 
+            color: #E5E7EB; 
+            overflow-x: hidden; 
+            cursor: none; 
+            scroll-behavior: smooth;
+        }
+        .text-hero {
+            font-size: clamp(3rem, 11vw, 8.5rem); 
+            line-height: 1.1;
+        }
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #B4A066; /* Accent color */
+            mix-blend-mode: soft-light; 
+            z-index: 9999;
+            opacity: 0.8;
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        height 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        opacity 0.3s ease-in-out;
+        }
+        img {
+            border-radius: 0.75rem;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05); /* Subtle zoom on hover */
+            filter: brightness(0.9);
+        }
+
+        /* Base styles for scroll-animated elements */
+        [data-scroll-anim] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .show { 
+            opacity: 1 !important; 
+            transform: translateY(0) !important;
+        }
+        
+        /* Specific gallery grid for responsive design */
+        .gallery-grid {
+            column-count: 1;
+            column-gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                column-count: 3;
+            }
+        }
+        .gallery-item {
+            display: inline-block;
+            margin-bottom: 2rem;
+            width: 100%;
+            overflow: hidden;
+            break-inside: avoid;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0A0A0A',
+                        'accent': '#B4A066', /* Faux velvet/gold accent */
+                    }
+                }
+            }
+        }
+    </script>
+
+   <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">VELVET SHAKER</a>
+            <nav class="space-x-4 flex items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="min-h-screen pt-24 pb-24 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Increased gap for the intro paragraphs -->
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+                <p class="text-lg text-text-primary animate-on-scroll">
+                    Nestled in the heart of Hong Kong, Velvet Shaker is more than just a bar—it’s a sensory journey.
+                </p>
+                <p class="text-lg text-text-primary animate-on-scroll" data-delay="100">
+                    Inspired by the city’s vibrant energy and global influences, this upscale cocktail haven combines modern design with a cozy, intimate atmosphere.
+                </p>
+            </div> -->
+
+            <!-- Tighter tracking and higher weight for display font fidelity -->
+            <h1 class="text-6xl sm:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200">
+                Good Vibes & Great Drinks
+            </h1>
+
+        </div>
+    </section>
+
+    <main class="pt-20 bg-primary-dark">
+        
+        <div class="mt-20 relative w-full h-[150vh] md:h-[150vh] overflow-hidden  shadow-2xl">
+                         <img id="about-image"
+                             data-scroll-anim="scale-down-fade"
+                             class="absolute w-full h-full object-cover transform scale-110 opacity-50"
+                             src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyGDv_LF22uRO9clf9aXMimi0s_XZZTlqPmfcR3ye_L4V_Cn3XbPpts7mRU8cTbTT2BDcM6rgi-nNgm-3rTOVVnae7aeBzB84-NSuUHBXcrl2VBICJfC6ezZxXGfm_-ez_ELC6P=s1360-w1360-h1020-rw?scale-down-to=2048"
+                             alt="Bar Interior"
+                             onerror="this.onerror=null;this.src='https://placehold.co/1200x800/2c2c2c/ffffff?text=Image+Load+Error';"
+                        />
+                    </div>
+
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-6 sm:px-12">
+                <div class="gallery-grid">
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx3oUA-gwvnho5gvDd5rQylkvZ-c3MyYNT6wWP0TPKseZIKLXkmNGR6JvxaUzIvxdZhsy0hN1KOMGjgYwh2GR1jTNRBY33x-s34VqadR1G2_l3VMSAxUaCNUuSzR025ijnDrWAt=s1360-w1360-h1020-rw" alt="Bar Interior" style="height: 500px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x1200/2c2c2c/ffffff?text=Bar+Setup'; this.style.height='500px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzeYcyPePSlyl36d1DZq69Y_1mn2lZus8uTNdt1oEzOvgrtcJsNlYu_MCI9OKHfcMsz5BAfYWAEbvSLW8UpYjXTZhPH75_SURif3bcBnKilNV-crOTR0CpJMXbCOIOb3lWSUqr7oQ=s1360-w1360-h1020-rw" alt="Seating Area" style="height: 350px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Cozy+Seating'; this.style.height='350px';"/>
+                    </div>
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxIjTG4Ax-WxBTiL91jsS3pnPxhk4kSUEKfLn0MTZ9Z9u7H7ll4u6_O_f9KOEnOKT-uWsJUPacvCOYEejEc19RvH10jz8_Di6tEBRFkM3n0uDGm3tyo53tGhvZfZy9T2jRFw6PaZA=s1360-w1360-h1020-rw" alt="Cocktail Close-up" style="height: 300px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Signature+Drink'; this.style.height='300px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzpJjIhSWwJj4rJjavvoSfZhSVw9uVIJolTuA_jNvZDTDrbvhLznDblzM-vrug8fCbXBLS5DVNGPvKGROG0GepYBKacsTyQ6uBmgCmT7RSXUqBWGxCGDcWpDDhTsbI4_FWAGqNn-Q=s1360-w1360-h1020-rw" alt="Mixologist" style="height: 450px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
+                    </div>
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxBipWFyD2w-mPgsZeYpUHEf2turSh9_uhi2U_nS_tj035XKrTJyPHGp4ZB5o_SeIjSJkZWzLcIrTTyA8djYEShG16oWPaIHIeWq-wHw7wYp0aoEYmzSsy-y1ucjc-sFhX6Y4s=s1360-w1360-h1020-rw" alt="Table Setting" style="height: 350px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxMk_eYEipqG9lvWsmPbYx87LW3KKBUA7z5lTlspzZTbNG3Ur4mvH_28CZ2FElYiXF3Lo0SlKg41J-3FTpoi_tnbbC07tflCfMjz-qMjeyFYWRiOJNEwrM7YSBBGbf_zr0jWQb8IA=s1360-w1360-h1020-rw" alt="Bar Shelf" style="height: 300px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwZMWlaqqBiIoDigkbLXiwEzmslvOOV7x50FtT3A4Xd7eih06jnOUTKAltBpd8krvc3Qwn9laoy7EtJWHr4rxgVtGVhWROZn_hoxljWhQPwI1qY0vyKdN6WsoP66_36K5HNxJi6YA=s1360-w1360-h1020-rw" alt="VIP Area" style="height: 250px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
+                    </div>
+
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx3oUA-gwvnho5gvDd5rQylkvZ-c3MyYNT6wWP0TPKseZIKLXkmNGR6JvxaUzIvxdZhsy0hN1KOMGjgYwh2GR1jTNRBY33x-s34VqadR1G2_l3VMSAxUaCNUuSzR025ijnDrWAt=s1360-w1360-h1020-rw" alt="Bar Interior" style="height: 500px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x1200/2c2c2c/ffffff?text=Bar+Setup'; this.style.height='500px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_7f8d210f.jpg" alt="Seating Area" style="height: 350px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Cozy+Seating'; this.style.height='350px';"/>
+                    </div>
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_61862279.jpg" alt="Cocktail Close-up" style="height: 300px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Signature+Drink'; this.style.height='300px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_c956bb5d.jpg" alt="Mixologist" style="height: 450px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
+                    </div>
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_0fa7f492.jpg" alt="Table Setting" style="height: 350px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_567e2bfd.jpg" alt="Bar Shelf" style="height: 300px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_186716be.jpg" alt="VIP Area" style="height: 250px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
+                    </div>
+
+                     <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_3c477fd5.jpg" alt="Mixologist" style="height: 450px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
+                    </div>
+
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_14dff4bb.jpg" alt="Table Setting" style="height: 350px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_88ac0679.jpg" alt="Bar Shelf" style="height: 300px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
+                    </div>
+                    
+                    <div class="gallery-item" data-scroll-anim>
+                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_4370b320.jpg" alt="VIP Area" style="height: 250px;" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
+                    </div>
+                    
+                    <div class="gallery-item text-4xl sm:text-8xl lg:text-7xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200" data-scroll-anim>
+                        <p> (view more..)</p>    
+                    </div>
+  
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Visit us</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Velvet Shaker</p><p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p><p class="font-medium text-white pt-4">Opening hours</p><p>Mon-Fri: 18:00-24:00</p><p>Sat-Sun: 16:00-late</p></div></div>
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Contact</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Bookings</p><a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a><p class="font-medium text-white pt-4">Press</p><a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a><p class="font-medium text-white pt-4">Whatsapp</p><a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a></div></div>
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Socials</h3><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">Instagram</a><a href="#" class="hover:text-accent block">X (Twitter)</a><a href="#" class="hover:text-accent block">Facebook</a><a href="#" class="hover:text-accent block">TikTok</a></div></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
+                    <div><h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4><div class="text-lg text-gray-400 space-y-3"><a href="index.html" class="hover:text-accent block">&gt; home</a><a href="about.html" class="hover:text-accent block">&gt; about</a><a href="contact.html" class="hover:text-accent block">&gt; contact</a><a href="#menu" class="hover:text-accent block">&gt; menu</a><a href="gallery.html" class="hover:text-accent block">&gt; gallery</a></div></div>
+                    <div><h4 class="text-xl font-bold text-white mb-6">LINKS</h4><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">&gt; faq</a><a href="#" class="hover:text-accent block">&gt; blog</a><a href="#" class="hover:text-accent block">&gt; privacy policy</a><a href="#" class="hover:text-accent block">&gt; accessibility</a></div></div>
+                    <div><h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">&gt; all pages</a><a href="#" class="hover:text-accent block">&gt; style guide</a><a href="#" class="hover:text-accent block">&gt; licenses</a><a href="#" class="hover:text-accent block">&gt; buy template</a><a href="#" class="hover:text-accent block">&gt; our website</a></div></div>
+                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full"><h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1><p class="text-gray-600 text-sm">see all templates</p></div>
+                </div>
+                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
+                    <p class="text-gray-600">&copy; 2025</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+    
+    <div id="custom-cursor" class="custom-cursor"></div>
+
+    <script>
+        // --- Custom Cursor Logic (Identical to Home Page) ---
+        const customCursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        const easing = 0.2; 
+
+        function lerp(start, end, amount) {
+            return (1 - amount) * start + amount * end;
+        }
+
+        function animateCursor() {
+            currentX = lerp(currentX, mouseX, easing);
+            currentY = lerp(currentY, mouseY, easing);
+            customCursor.style.transform = `translate3d(${currentX - 15}px, ${currentY - 15}px, 0)`; 
+            requestAnimationFrame(animateCursor);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        document.querySelectorAll('a, button, .gallery-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                customCursor.style.width = '60px'; 
+                customCursor.style.height = '60px';
+                customCursor.style.opacity = '1';
+            });
+            el.addEventListener('mouseleave', () => {
+                customCursor.style.width = '30px'; 
+                customCursor.style.height = '30px';
+                customCursor.style.opacity = '0.8';
+            });
+        });
+
+        requestAnimationFrame(animateCursor);
+
+
+        // --- SCROLL ANIMATION LOGIC (Simplified for this page) ---
+        const scrollAnimElements = document.querySelectorAll('[data-scroll-anim]');
+        
+        function checkScrollIn(el, threshold = 0.8) {
+            const rect = el.getBoundingClientRect();
+            const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+            const isVisible = rect.top <= viewHeight * threshold && rect.bottom >= 0;
+            
+            if (isVisible) {
+                el.classList.add('show');
+            }
+        }
+
+        function scrollLoop() {
+            // Check for reveal animations
+            scrollAnimElements.forEach(el => {
+                checkScrollIn(el, 0.8);
+            });
+
+            // Header shrink logic
+            const header = document.getElementById('header');
+            const scrollY = window.scrollY;
+            if (header) {
+                if (scrollY > 100) {
+                    header.style.height = '70px'; 
+                    header.classList.add('shadow-xl');
+                } else {
+                    header.style.height = '80px'; 
+                    header.classList.remove('shadow-xl');
+                }
+            }
+
+            requestAnimationFrame(scrollLoop);
+        }
+
+        requestAnimationFrame(scrollLoop);
+    </script>
+</body>
+</html>

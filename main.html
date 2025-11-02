@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Shaker - Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; 
+            color: #E5E7EB; 
+            overflow-x: hidden; 
+            cursor: none; 
+            scroll-behavior: smooth;
+        }
+        .text-hero {
+            font-size: clamp(3rem, 11vw, 8.5rem); 
+            line-height: 1.1;
+        }
+        /* Style copied from the Home page for menu items */
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #27272A;
+            padding: 2.5rem 0;
+            cursor: default;
+        }
+        @media (min-width: 1024px) {
+            .menu-item {
+                display: grid;
+                grid-template-columns: 40% 50% 10%; /* Title, Description, Price */
+                gap: 2rem;
+                align-items: flex-start;
+                padding-bottom: 2.5rem;
+            }
+        }
+        .menu-item:hover .menu-title {
+            color: #B4A066;
+            transition: color 0.3s;
+        }
+        .text-section-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+        }
+
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #B4A066; 
+            mix-blend-mode: soft-light; 
+            z-index: 9999;
+            opacity: 0.8;
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        height 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+                        opacity 0.3s ease-in-out;
+        }
+        
+        /* Scroll Animation Styles */
+        [data-scroll-anim] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .show { 
+            opacity: 1 !important; 
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0A0A0A',
+                        'accent': '#B4A066', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">VELVET SHAKER</a>
+            <nav class="space-x-4 flex items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="min-h-screen pt-24 pb-24 section-divider">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Increased gap for the intro paragraphs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+                <p class="text-lg text-text-primary animate-on-scroll">
+                    (Menu)
+                </p>
+                
+            </div>
+
+            <!-- Tighter tracking and higher weight for display font fidelity -->
+            <h1 class="text-5xl sm:text-8xl lg:text-8xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200">
+                Explore our vide range of <br>Paans & Mocktails<br> only at &mdash; Thakur Pan
+            </h1>
+
+        </div>
+    </section>
+
+
+    <main class="pt-20 bg-primary-dark">
+        
+        <!-- <section class="min-h-[60vh] flex items-center justify-center text-center">
+            <div class="px-4 max-w-5xl relative z-10 w-full" data-scroll-anim>
+                <p class="text-gray-600 font-light mb-8 uppercase tracking-widest">03// The Full Collection</p>
+                <h1 class="text-hero font-extrabold text-white">
+                    Our Cocktail Menu
+                </h1>
+            </div>
+        </section> -->
+
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <h2 class="text-section-title font-semibold text-accent mb-12" data-scroll-anim>Signature Cocktails</h2>
+                <div id="signature-list">
+                    
+                    <div class="menu-item" data-scroll-anim>
+                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Peach Blossom</h3>
+                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                            Vodka, peach puree, fresh lemon, and a touch of honey syrup. Served over crushed ice.
+                        </p>
+                        <p class="text-xl font-medium text-white w-full lg:w-auto text-left lg:text-right mt-2 lg:mt-0">$160</p>
+                    </div>
+
+                    <div class="menu-item" data-scroll-anim>
+                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Lavender Mist</h3>
+                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                            Gin, elderflower liqueur, lime, and lavender syrup. A floral, refreshing sip.
+                        </p>
+                        <p class="text-xl font-medium text-white w-full lg:w-auto text-left lg:text-right mt-2 lg:mt-0">$175</p>
+                    </div>
+                    
+                    <div class="menu-item" data-scroll-anim>
+                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Velvet Old Fashioned</h3>
+                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                            Aged bourbon, house-made velvet bitters, and a twist of mandarin zest.
+                        </p>
+                        <p class="text-xl font-medium text-white w-full lg:w-auto text-left lg:text-right mt-2 lg:mt-0">$190</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <section class="py-20 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <h2 class="text-section-title font-semibold text-accent mb-12" data-scroll-anim>The Classics</h2>
+                <div id="classics-list">
+                    
+                    <div class="menu-item" data-scroll-anim>
+                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Negroni</h3>
+                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                            Equal parts Gin, Campari, and Sweet Vermouth, stirred to perfection.
+                        </p>
+                        <p class="text-xl font-medium text-white w-full lg:w-auto text-left lg:text-right mt-2 lg:mt-0">$150</p>
+                    </div>
+
+                    <div class="menu-item" data-scroll-anim>
+                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Manhattan</h3>
+                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                            Rye Whiskey, Sweet Vermouth, and Angostura bitters. Garnished with a cherry.
+                        </p>
+                        <p class="text-xl font-medium text-white w-full lg:w-auto text-left lg:text-right mt-2 lg:mt-0">$150</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Visit us</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Velvet Shaker</p><p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p><p class="font-medium text-white pt-4">Opening hours</p><p>Mon-Fri: 18:00-24:00</p><p>Sat-Sun: 16:00-late</p></div></div>
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Contact</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Bookings</p><a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a><p class="font-medium text-white pt-4">Press</p><a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a><p class="font-medium text-white pt-4">Whatsapp</p><a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a></div></div>
+                    <div><h3 class="text-3xl font-bold text-white mb-6">Socials</h3><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">Instagram</a><a href="#" class="hover:text-accent block">X (Twitter)</a><a href="#" class="hover:text-accent block">Facebook</a><a href="#" class="hover:text-accent block">TikTok</a></div></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
+                    <div><h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4><div class="text-lg text-gray-400 space-y-3"><a href="index.html" class="hover:text-accent block">&gt; home</a><a href="about.html" class="hover:text-accent block">&gt; about</a><a href="contact.html" class="hover:text-accent block">&gt; contact</a><a href="menu.html" class="hover:text-accent block">&gt; menu</a><a href="gallery.html" class="hover:text-accent block">&gt; gallery</a></div></div>
+                    <div><h4 class="text-xl font-bold text-white mb-6">LINKS</h4><div class="text-lg text-gray-400 space-y-3"><a href="faq.html" class="hover:text-accent block">&gt; faq</a><a href="#" class="hover:text-accent block">&gt; blog</a><a href="#" class="hover:text-accent block">&gt; privacy policy</a><a href="#" class="hover:text-accent block">&gt; accessibility</a></div></div>
+                    <div><h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">&gt; all pages</a><a href="faq.html" class="hover:text-accent block">&gt; style guide</a><a href="#" class="hover:text-accent block">&gt; licenses</a><a href="#" class="hover:text-accent block">&gt; buy template</a><a href="#" class="hover:text-accent block">&gt; our website</a></div></div>
+                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full"><h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1><p class="text-gray-600 text-sm">see all templates</p></div>
+                </div>
+                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
+                    <p class="text-gray-600">&copy; 2025</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+    
+    <div id="custom-cursor" class="custom-cursor"></div>
+
+    <script>
+        // --- Custom Cursor Logic (Consistent) ---
+        const customCursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        const easing = 0.2; 
+        function lerp(start, end, amount) { return (1 - amount) * start + amount * end; }
+        function animateCursor() {
+            currentX = lerp(currentX, mouseX, easing);
+            currentY = lerp(currentY, mouseY, easing);
+            customCursor.style.transform = `translate3d(${currentX - 15}px, ${currentY - 15}px, 0)`; 
+            requestAnimationFrame(animateCursor);
+        }
+        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        document.querySelectorAll('a, button, .menu-item').forEach(el => {
+            el.addEventListener('mouseenter', () => { customCursor.style.width = '60px'; customCursor.style.height = '60px'; customCursor.style.opacity = '1'; });
+            el.addEventListener('mouseleave', () => { customCursor.style.width = '30px'; customCursor.style.height = '30px'; customCursor.style.opacity = '0.8'; });
+        });
+        requestAnimationFrame(animateCursor);
+
+        // --- SCROLL ANIMATION LOGIC (Consistent) ---
+        const scrollAnimElements = document.querySelectorAll('[data-scroll-anim]');
+        function checkScrollIn(el, threshold = 0.8) {
+            const rect = el.getBoundingClientRect();
+            const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+            const isVisible = rect.top <= viewHeight * threshold && rect.bottom >= 0;
+            if (isVisible) { el.classList.add('show'); }
+        }
+        function scrollLoop() {
+            scrollAnimElements.forEach(el => { checkScrollIn(el, 0.8); });
+            const header = document.getElementById('header');
+            if (header) {
+                if (window.scrollY > 100) { header.style.height = '70px'; header.classList.add('shadow-xl'); } 
+                else { header.style.height = '80px'; header.classList.remove('shadow-xl'); }
+            }
+            requestAnimationFrame(scrollLoop);
+        }
+        requestAnimationFrame(scrollLoop);
+    </script>
+</body>
+</html>
