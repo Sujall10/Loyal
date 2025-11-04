@@ -7,34 +7,147 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0A0A0A; 
-            color: #E5E7EB; 
-            overflow-x: hidden; 
-            /* Cursor needs to be hidden for the custom cursor to take over */
-            cursor: none; 
+            background-color: #0A0A0A;
+            color: #E5E7EB;
+            overflow-x: hidden;
+            cursor: none;
             scroll-behavior: smooth;
         }
-        /* Custom font size for the large titles */
+
+        /* Responsive Typography System - Framer Style */
         .text-hero {
-            /* Adjusted clamp for slightly larger feel on desktop */
-            font-size: clamp(3rem, 11vw, 8.5rem); 
-            line-height: 1.1;
+            font-size: clamp(2.25rem, 8vw, 8.5rem);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
-        /* Style for the welcome section paragraph */
+
         .text-welcome {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            line-height: 1.3;
+            font-size: clamp(1.125rem, 3.5vw, 3rem);
+            line-height: 1.25;
+            font-weight: 600;
         }
+
         .text-story-lg {
-            font-size: 2.1rem;
-            line-height: 1.2;
+            font-size: clamp(1.25rem, 2.5vw, 2.1rem);
+            line-height: 1.3;
+            font-weight: 700;
         }
+
+        .text-section-title {
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Desktop: 1024px+ */
+        @media (min-width: 1024px) {
+            .container-padding {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+           
+            .section-py {
+                padding-top: 8rem;
+                padding-bottom: 8rem;
+            }
+
+            .hero-content {
+                padding-top: 3.5rem;
+            }
+        }
+
+        /* Tablet: 768px - 1023px */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container-padding {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+            }
+           
+            .section-py {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+
+            .hero-content {
+                padding-top: 8rem;
+            }
+
+            .text-hero {
+                font-size: clamp(4rem, 10vw, 6rem);
+            }
+        }
+
+        /* Mobile: 320px - 767px */
+        @media (max-width: 767px) {
+            .container-padding {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+           
+            .section-py {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+            
+            .hero-content {
+                padding-top: 6rem;
+            }
+
+            #about-text {
+                font-size: 1rem;
+            }
+            
+            body, html {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            #hero {
+                overflow: hidden;
+            }
+
+            #about-image {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+            }
+            
+            .sticky-content {
+                padding-top: 2rem;
+                height: auto;
+                min-height: auto;
+            }
+
+            .scroll-section {
+                min-height: auto;
+            }
+            
+            #about-c {
+                height: 50vh;
+                margin-top: 3rem;
+                margin-bottom: 1rem;
+            }
+            
+            #about {
+                min-height: auto;
+                padding-bottom: 2rem;
+            }
+        }
+
         .scroll-section {
-            /* Increased duration for smoother sticky animation */
-            min-height: 280vh; 
+            min-height: 130vh;
         }
+       
         .sticky-content {
             position: sticky;
             top: 0;
@@ -44,12 +157,35 @@
             justify-content: center;
             overflow: hidden;
         }
+       
         img {
             border-radius: 0.75rem;
             object-fit: cover;
         }
-        
-        /* Custom Cursor Styling */
+
+        /* Hero Background Image */
+        #hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            transform: translateY(0px) scale(1.15);
+            filter: brightness(0.7);
+        }
+
+        /* About Section Image */
+        #about-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            opacity: 0.5;
+        }
+       
+        /* Custom Cursor */
         .custom-cursor {
             pointer-events: none;
             position: fixed;
@@ -58,8 +194,8 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background-color: #B4A066; /* Accent color */
-            mix-blend-mode: soft-light; 
+            background-color: #B4A066;
+            mix-blend-mode: soft-light;
             z-index: 9999;
             opacity: 0.8;
             transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1),
@@ -67,209 +203,285 @@
                         opacity 0.3s ease-in-out;
         }
 
-        /* Menu item hover effect and grid layout for desktop */
+        @media (max-width: 1023px) {
+            .custom-cursor {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* Menu Item Styles */
         .menu-item {
             display: flex;
             flex-direction: column;
             border-bottom: 1px solid #27272A;
             padding: 1.5rem 0;
-            cursor: default;
+            gap: 0.75rem;
         }
+
+        @media (min-width: 768px) {
+            .menu-item {
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+        }
+
         @media (min-width: 1024px) {
             .menu-item {
                 display: grid;
-                /* Use grid to define specific column widths: Title (40%) and Description (60%) */
-                grid-template-columns: 40% 60%; 
+                grid-template-columns: 40% 60%;
                 gap: 2rem;
                 align-items: flex-start;
-                padding-bottom: 2.5rem; /* Increased padding-bottom for better vertical separation */
+                padding: 2.5rem 0;
             }
         }
+
         .menu-item:hover .menu-title {
             color: #B4A066;
             transition: color 0.3s;
         }
+
         .menu-item:hover .menu-desc {
             color: #E5E7EB;
             transition: color 0.3s;
         }
-        
-        /* Remove border from the last menu item to match the original */
+       
         #menu-list > .menu-item:last-child {
             border-bottom: none;
         }
-
 
         .blog-card {
             cursor: pointer;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
+
         .blog-card:hover {
             opacity: 0.9;
         }
 
-        /* Base styles for scroll-animated elements - initially invisible and slightly offset */
         [data-scroll-anim] {
             opacity: 0;
-            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
                         transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        
-        /* Hero background styling for the parallax effect */
-        #hero-bg {
-             /* Increased scale for deeper parallax effect */
-             transform: scale(1.15); 
-             /* Dark overlay to increase contrast */
-             filter: brightness(0.7); 
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
         }
 
+        #mobile-menu.active {
+            max-height: 500px;
+        }
+
+        /* Gallery Images */
+        .occasion-img {
+            width: 100%;
+            height: 3rem;
+            object-fit: cover;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .occasion-img {
+                height: 4rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .occasion-img {
+                height: 5rem;
+            }
+        }
+
+        .story-img {
+            width: 100%;
+            height: 16rem;
+            object-fit: cover;
+        }
+
+        @media (min-width: 640px) {
+            .story-img {
+                height: 20rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .story-img {
+                height: 24rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .story-img {
+                height: 400px;
+            }
+        }
+
+        .category-img {
+            width: 100%;
+            height: 10rem;
+            object-fit: cover;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .category-img {
+                height: 12rem;
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Tailwind Config for a dark aesthetic -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         'primary-dark': '#0A0A0A',
-                        'accent': '#B4A066', /* Faux velvet/gold accent */
+                        'accent': '#B4A066',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Header / Sticky Navigation -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">THAKUR PAN</a>
-            <nav class="space-x-4 flex items-center">
-                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
-                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
-                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
-                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
-                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/90 backdrop-blur-md shadow-lg">
+        <div class="max-w-7xl mx-auto container-padding h-20 lg:h-20 flex items-center justify-between">
+            <a href="index.html" class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-widest">THAKUR PAN</a>
+           
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">gallery</a>
             </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none z-50">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="lg:hidden bg-primary-dark/95 backdrop-blur-lg border-t border-gray-800">
+            <div class="container-padding py-6 space-y-1">
+                <a href="index.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">home</a>
+                <a href="About.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">about</a>
+                <a href="contact.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">contact</a>
+                <a href="main.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">menu</a>
+                <a href="Gallery.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">gallery</a>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <!-- 1. HERO SECTION (00// HOME) -->
-        <section id="hero" class="h-screen flex items-center justify-center text-center bg-primary-dark relative">
-             <!-- Background Image Container for parallax/reveal effect -->
-             <img id="hero-bg" class="absolute inset-0 w-full h-full object-cover opacity-30 transform scale-150" src="https://placehold.co/1920x1080/1a1a1a/B4A066?text=Where+taste+turns+trendy." alt="Bar Interior Background" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/1a1a1a/B4A066?text=Where+taste+turns+trendy.';" style="transform: translateY(0px) scale(1.15);">
-             <!-- Dark overlay to ensure text contrast -->
-             <div class="absolute inset-0 bg-black/50 z-0"></div> 
+        <!-- HERO SECTION -->
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center bg-primary-dark relative">
+            <img id="hero-bg" 
+                 src="https://placehold.co/1920x1080/1a1a1a/B4A066?text=Where+taste+turns+trendy."
+                 alt="Bar Interior Background">
+            <div class="absolute inset-0 bg-black/50 z-0"></div>
 
-            <div class="px-4 py-14 max-w-5xl relative z-10 text-white w-full">
-                
-                <div class="flex flex-col sm:flex-row justify-between w-full mb-4">
-                    <!-- Top text - Adjusted to be left-aligned on desktop -->
-                    <div class="px-4 py-4 text-gray-400 font-light tracking-widest uppercase text-left">
-                        Vadodara’s most aesthetic chill spot— Thakur Pan,the talk of Akshar Chowk.
+            <div class="container-padding hero-content max-w-6xl relative z-10 text-white w-full">
+               
+                <div class="flex flex-col md:flex-row justify-between w-full mb-6 md:mb-8 gap-4">
+                    <div class="text-gray-400 font-light tracking-wider uppercase text-xs sm:text-sm text-left">
+                        Vadodara's most aesthetic chill spot— Thakur Pan, the talk of Akshar Chowk.
                     </div>
-                    <!-- Opening Hours -->
-                    <div class="text-right text-lg font-light text-gray-400 mt-4 sm:mt-0">
-                        <p class="font-medium text-white text-xl">8:00-late</p>
+                    <div class="text-left md:text-right text-base sm:text-lg font-light text-gray-400">
+                        <p class="font-medium text-white text-lg sm:text-xl">8:00-late</p>
                         <p>Mon-Sun</p>
                     </div>
                 </div>
 
-
-                <!-- Main Hero Title - Adjusted to be left-aligned -->
-                <h1 class="text-hero font-extrabold text-white mb-6 relative text-left">
+                <h1 class="text-hero text-white mb-8 md:mb-12 text-left">
                     THAKUR PAN
                 </h1>
-                
-                <!-- Bottom links/info - Adjusted to be left-aligned -->
-                <div class="flex flex-col sm:flex-row justify-start max-w-lg text-lg font-light text-gray-400 mt-12 space-y-2 sm:space-y-0 sm:space-x-8 text-left">
-                    
-                    <a href="main.html" class="hover:text-accent block">&gt; menu</a>
-                    <a href="About.html" class="hover:text-accent block">&gt; about</a>
-                    <a href="Gallery.html" class="hover:text-accent block">&gt; gallery</a>
+               
+                <div class="flex flex-col sm:flex-row justify-start gap-4 sm:gap-8 text-base sm:text-lg font-light text-gray-400 text-left">
+                    <a href="main.html" class="hover:text-accent transition">&gt; menu</a>
+                    <a href="About.html" class="hover:text-accent transition">&gt; about</a>
+                    <a href="Gallery.html" class="hover:text-accent transition">&gt; gallery</a>
                 </div>
-                
-                <!-- Spacer to push content up slightly -->
-                <div class="h-20 sm:h-32"></div>
+               
+                <div class="h-12 sm:h-20 md:h-32"></div>
             </div>
         </section>
 
-        <!-- 2. SCROLL SECTION: ABOUT/WELCOME (01// ABOUT) -->
+        <!-- ABOUT SECTION -->
         <section id="about" class="scroll-section">
-            <!-- Image with Scaling Effect that reveals as the section scrolls up -->
-                    <div class="mt-20 relative w-full h-[150vh] md:h-[150vh] overflow-hidden  shadow-2xl">
-                         <img id="about-image"
-                             data-scroll-anim="scale-down-fade"
-                             class="absolute w-full h-full object-cover transform scale-110 opacity-50"
-                             src="https://framerusercontent.com/images/VNMuXSmJI8Gz65cjSk8fceYAA.jpg?scale-down-to=2048"
-                             alt="Bar Interior"
-                             onerror="this.onerror=null;this.src='https://placehold.co/1200x800/2c2c2c/ffffff?text=Image+Load+Error';"
-                        />
-                    </div>
+            <div id="about-c" class="mt-12 sm:mt-16 md:mt-20 relative w-full h-[120vh] md:h-[150vh] overflow-hidden shadow-2xl">
+                <img id="about-image"
+                    data-scroll-anim="scale-down-fade"
+                    src="https://framerusercontent.com/images/VNMuXSmJI8Gz65cjSk8fceYAA.jpg?scale-down-to=2048"
+                    alt="Bar Interior"
+                />
+            </div>
             <div class="sticky-content bg-primary-dark pt-20">
-                <div class="max-w-6xl mx-auto px-6 sm:px-12 text-left w-full">
-
-                    
-                    <p class="text-gray-600 font-light mb-16">01// ABOUT</p>
-                    
-                    <!-- Main Text Block: Starts Transparent/Shifted, Fades In -->
-                    <p id="about-text" 
+                <div class="max-w-6xl mx-auto container-padding text-left w-full">
+                    <p class="text-gray-600 font-light mb-8 sm:mb-12 md:mb-16 text-section-title">01// ABOUT</p>
+                   
+                    <p id="about-text"
                        data-scroll-anim="fade-in-up"
-                       class="text-welcome font-semibold text-gray-200 translate-y-8">
-                        From iconic paans to drool-worthy waffles, chill mocktails to mood-lifting chai — we’re not just serving food, we’re serving moments worth posting. Snap it, sip it, share it.
+                       class="text-welcome text-gray-200 translate-y-8 mb-6">
+                        From iconic paans to drool-worthy waffles, chill mocktails to mood-lifting chai — we're not just serving food, we're serving moments worth posting. Snap it, sip it, share it.
                     </p>
-                    <a href="#" class="text-gray-400 mt-8 block hover:text-accent transition duration-200">&gt; see gallery</a>
-
-                    
+                    <a href="Gallery.html" class="text-gray-400 text-sm sm:text-base hover:text-accent transition duration-200">&gt; see gallery</a>
                 </div>
             </div>
         </section>
 
-
-        <!-- 3. MENU SECTION (02// SELECTED DRINKS) -->
-        <section id="menu" class="py-32 bg-primary-dark">
-            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <p class="text-gray-600 font-light mb-16">02// SELECTED DRINKS</p>
+        <!-- MENU SECTION -->
+        <section id="menu" class="section-py bg-primary-dark">
+            <div class="max-w-6xl mx-auto container-padding w-full">
+                <p class="text-gray-600 font-light mb-8 sm:mb-12 md:mb-16 text-section-title">02// SELECTED DRINKS</p>
                 <div id="menu-list" class="divide-y divide-gray-800">
-                    
-                    <!-- Menu Item 1: Peach Blossom -->
+                   
                     <div class="menu-item translate-y-10" data-scroll-anim="list-item">
-                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Peach Blossom</h3>
-                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                        <h3 class="menu-title text-xl sm:text-2xl md:text-3xl font-light text-white">Peach Blossom</h3>
+                        <p class="menu-desc text-sm sm:text-base md:text-lg font-light text-gray-500">
                             A blend of vodka, peach puree, fresh lemon juice, and a touch of honey syrup. Served over crushed ice.
                         </p>
                     </div>
 
-                    <!-- Menu Item 2: Lavender Mist -->
                     <div class="menu-item translate-y-10" data-scroll-anim="list-item">
-                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Lavender Mist</h3>
-                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                        <h3 class="menu-title text-xl sm:text-2xl md:text-3xl font-light text-white">Lavender Mist</h3>
+                        <p class="menu-desc text-sm sm:text-base md:text-lg font-light text-gray-500">
                             A blend of gin, elderflower liqueur, fresh lime juice, and a hint of lavender syrup. Served over crushed ice.
                         </p>
                     </div>
 
-                    <!-- Menu Item 3: Mint Cloud -->
                     <div class="menu-item translate-y-10" data-scroll-anim="list-item">
-                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Mint Cloud</h3>
-                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                        <h3 class="menu-title text-xl sm:text-2xl md:text-3xl font-light text-white">Mint Cloud</h3>
+                        <p class="menu-desc text-sm sm:text-base md:text-lg font-light text-gray-500">
                             White rum, fresh mint, coconut cream, and a splash of lime juice. Served with a mint garnish.
                         </p>
                     </div>
 
-                    <!-- Menu Item 4: Rose Garden -->
                     <div class="menu-item translate-y-10" data-scroll-anim="list-item">
-                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Rose Garden</h3>
-                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                        <h3 class="menu-title text-xl sm:text-2xl md:text-3xl font-light text-white">Rose Garden</h3>
+                        <p class="menu-desc text-sm sm:text-base md:text-lg font-light text-gray-500">
                             Gin, rose syrup, grapefruit juice, and a hint of elderflower liqueur. Served over ice.
                         </p>
                     </div>
 
-                    <!-- Menu Item 5: Blue Lagoon -->
                     <div class="menu-item translate-y-10" data-scroll-anim="list-item">
-                        <h3 class="menu-title text-3xl font-light text-white w-full lg:w-auto">Blue Lagoon</h3>
-                        <p class="menu-desc text-lg font-light text-gray-500 w-full lg:w-auto mt-2 lg:mt-0">
+                        <h3 class="menu-title text-xl sm:text-2xl md:text-3xl font-light text-white">Blue Lagoon</h3>
+                        <p class="menu-desc text-sm sm:text-base md:text-lg font-light text-gray-500">
                             Vodka, blue curacao, lemonade, and a twist of lime for a zesty finish. Served chilled.
                         </p>
                     </div>
@@ -277,66 +489,58 @@
             </div>
         </section>
 
-        <!-- 4. OCCASIONS SECTION (03// OCCASIONS) -->
-        <section id="occasions" class="py-32 bg-primary-dark">
-            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <p class="text-gray-600 font-light mb-16">03// OCCASIONS</p>
+        <!-- OCCASIONS SECTION -->
+        <section id="occasions" class="section-py bg-primary-dark">
+            <div class="max-w-6xl mx-auto container-padding w-full">
+                <p class="text-gray-600 font-light mb-8 sm:mb-12 md:mb-16 text-section-title">03// OCCASIONS</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    <!-- Occasion 1: Romantic -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                   
                     <div class="translate-y-10" data-scroll-anim="card-item">
-                        <h3 class="text-4xl font-semibold text-white mb-6">Romantic</h3>
-                        <img class="w-full h-12 md:h-20 object-cover mb-4" 
-                             src="uploaded:image_ffc51f.jpg-bb23b9b5-9a0f-49df-b4ab-54dd6dba41c9"
-                             alt="Orange Petals" 
-                             onerror="this.onerror=null;this.src='https://framerusercontent.com/images/LSV9eo7Gho5XxJXiw14ojI2WAG0.jpg?scale-down-to=2048';"
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 sm:mb-6">Romantic</h3>
+                        <img class="occasion-img"
+                             src="https://framerusercontent.com/images/LSV9eo7Gho5XxJXiw14ojI2WAG0.jpg?scale-down-to=2048"
+                             alt="Romantic Setting"
                         />
-                        <p class="text-gray-400">Enjoy a cozy evening designed for connection. Soft lighting and refined details create the perfect setting for a romantic night out.</p>
+                        <p class="text-gray-400 text-sm sm:text-base">Enjoy a cozy evening designed for connection. Soft lighting and refined details create the perfect setting for a romantic night out.</p>
                     </div>
 
-                    <!-- Occasion 2: Business -->
                     <div class="translate-y-10" data-scroll-anim="card-item">
-                        <h3 class="text-4xl font-semibold text-white mb-6">Business</h3>
-                        <img class="w-full h-12 md:h-20 object-cover mb-4" 
-                             src="uploaded:image_ffc867.jpg-898e56f4-d5a6-410b-ba9b-5840d77f3c1d" 
-                             alt="Business Setting" 
-                             onerror="this.onerror=null;this.src='https://framerusercontent.com/images/BKZoXxGEHX8arzF1nSF6UGlipMQ.png?scale-down-to=1024';"
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 sm:mb-6">Business</h3>
+                        <img class="occasion-img"
+                             src="https://framerusercontent.com/images/BKZoXxGEHX8arzF1nSF6UGlipMQ.png?scale-down-to=1024"
+                             alt="Business Setting"
                         />
-                        <p class="text-gray-400">Plan meetings in a calm, & upscale space. Aesthetic ambiance and signature servings built to impress.</p>
+                        <p class="text-gray-400 text-sm sm:text-base">Plan meetings in a calm, & upscale space. Aesthetic ambiance and signature servings built to impress.</p>
                     </div>
 
-                    <!-- Occasion 3: Parties -->
                     <div class="translate-y-10" data-scroll-anim="card-item">
-                        <h3 class="text-4xl font-semibold text-white mb-6">Parties</h3>
-                        <img class="w-full h-12 md:h-20 object-cover mb-4" 
-                             src="uploaded:image_ffc4c7.jpg-5d423618-27bf-4197-a891-e0dd566b1e7e" 
-                             alt="Party Drinks" 
-                             onerror="this.onerror=null;this.src='https://framerusercontent.com/images/j5auX5GdrDkjLO8JbminqJOTI.png?scale-down-to=1024';"
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 sm:mb-6">Parties</h3>
+                        <img class="occasion-img"
+                             src="https://framerusercontent.com/images/j5auX5GdrDkjLO8JbminqJOTI.png?scale-down-to=1024"
+                             alt="Party Drinks"
                         />
-                        <p class="text-gray-400">Celebrate freely with great drinks, music, and atmosphere. Perfect for birthdays, get-togethers, and spontaneous fun with friends.</p>
+                        <p class="text-gray-400 text-sm sm:text-base">Celebrate freely with great drinks, music, and atmosphere. Perfect for birthdays, get-togethers, and spontaneous fun with friends.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. OUR STORY SECTION (04// OUR STORY) -->
-        <section id="story" class="py-32 bg-primary-dark">
-             <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <p class="text-gray-600 font-light mb-16">04// OUR STORY</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-                    <div class="space-y-12">
-                         <!-- Large text block -->
+        <!-- OUR STORY SECTION -->
+        <section id="story" class="section-py bg-primary-dark">
+            <div class="max-w-6xl mx-auto container-padding w-full">
+                <p class="text-gray-600 font-light mb-8 sm:mb-12 md:mb-16 text-section-title">04// OUR STORY</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24">
+                    <div class="space-y-8 sm:space-y-12">
                         <div class="translate-y-10" data-scroll-anim="list-item">
-                            <p class="text-story-lg font-bold text-white">
+                            <p class="text-story-lg text-white">
                                 Started as a local spot for refreshing sodas and classic paans soon evolved into a youth hotspot, blending heritage, flavor, and style under one vibrant roof.
                             </p>
                         </div>
-                        
-                        <!-- Two-column supporting text -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-400 text-lg font-light">
+                       
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-gray-400 text-sm sm:text-base md:text-lg font-light">
                             <p class="translate-y-10" data-scroll-anim="list-item-delay">
-                                Born in the heart of Vadodara, Thakur Pan & Soda began with a simple idea — to take the timeless charm of India’s favorite street indulgences and give them a modern, premium twist.
+                                Born in the heart of Vadodara, Thakur Pan & Soda began with a simple idea — to take the timeless charm of India's favorite street indulgences and give them a modern, premium twist.
                             </p>
                             <p class="translate-y-10" data-scroll-anim="list-item-delay">
                                 We believe every moment deserves good taste, cozy comfort, and a touch of luxury — all wrapped in a setting built to impress. Thakur Pan has become a go-to destination for those seeking a unique experience.
@@ -344,189 +548,153 @@
                         </div>
                     </div>
 
-                    <!-- Image on the right -->
                     <div class="mt-8 lg:mt-0 translate-y-10" data-scroll-anim="list-item">
-                        <img class="w-full h-[400px] object-cover"
-                             src="Images\WhatsApp Image 2025-11-02 at 03.48.40_bde27556.jpg"
+                        <img class="story-img"
+                             src="https://framerusercontent.com/images/tbo7WvMxoXZCZMypIyHZT8CaT4.jpg?scale-down-to=2048"
                              alt="Bar Exterior"
-                             onerror="this.onerror=null;this.src='https://framerusercontent.com/images/tbo7WvMxoXZCZMypIyHZT8CaT4.jpg?scale-down-to=2048';"
                         />
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- 6. WHAT'S HAPPENING (05// WHAT'S HAPPENING) -->
-        <section id="happenings" class="py-32 bg-primary-dark">
-            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <p class="text-gray-600 font-light mb-16">05// CATEGORIES</p>
-                <h2 class="text-4xl font-bold text-white mb-16 translate-y-10" data-scroll-anim="list-item">
-                    Explore our vide range of product categories
+       
+        <!-- CATEGORIES SECTION -->
+        <section id="happenings" class="section-py bg-primary-dark">
+            <div class="max-w-6xl mx-auto container-padding w-full">
+                <p class="text-gray-600 font-light mb-8 sm:mb-12 md:mb-16 text-section-title">05// CATEGORIES</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 sm:mb-12 md:mb-16 translate-y-10" data-scroll-anim="list-item">
+                    Explore our wide range of product categories
                 </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    
-                    <!-- Event 1: Wine Tasting -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                   
                     <div class="blog-card translate-y-10" data-scroll-anim="card-item">
-                        <img class="w-full h-48 object-cover mb-4" 
-                             src="hero_img\WhatsApp Image 2025-11-02 at 04.11.40_52ad2fbf.jpg" 
-                             alt="Wine Tasting" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/6A0DAD/FFFFFF?text=Image+Load+Error';"
+                        <img class="category-img"
+                             src="https://placehold.co/400x300/6A0DAD/FFFFFF?text=Waffles"
+                             alt="Waffle"
                         />
-                        <h4 class="text-xl font-semibold text-white mb-1">Waffle</h4>
-                        <!-- <p class="text-sm text-gray-500 mb-3">Dec 11, 2024</p> -->
-                        <p class="text-gray-400 mb-4">A mellow evening of curated wines and ambient vibes.</p>
-                        <a href="main.html" class="text-accent hover:underline text-sm font-medium">&gt; see more</a>
+                        <h4 class="text-lg sm:text-xl font-semibold text-white mb-1">Waffle</h4>
+                        <p class="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">A mellow evening of curated wines and ambient vibes.</p>
+                        <a href="main.html" class="text-accent hover:underline text-xs sm:text-sm font-medium">&gt; see more</a>
                     </div>
 
-                    <!-- Event 2: When in Hong Kong -->
                     <div class="blog-card translate-y-10" data-scroll-anim="card-item">
-                        <img class="w-full h-48 object-cover mb-4" 
-                             src="hero_img\WhatsApp Image 2025-11-02 at 04.11.41_f60dfa14.jpg" 
-                             alt="Hong Kong Night" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/8B0000/FFFFFF?text=Image+Load+Error';"
+                        <img class="category-img"
+                             src="https://placehold.co/400x300/8B0000/FFFFFF?text=Desserts"
+                             alt="Desserts"
                         />
-                        <h4 class="text-xl font-semibold text-white mb-1">Desserts & Ice-cream</h4>
-                        <!-- <p class="text-sm text-gray-500 mb-3">Dec 20, 2024</p> -->
-                        <p class="text-gray-400 mb-4">A visual and flavor trip inspired by the neon nights of Hong Kong.</p>
-                        <a href="main.html" class="text-accent hover:underline text-sm font-medium">&gt; see more</a>
+                        <h4 class="text-lg sm:text-xl font-semibold text-white mb-1">Desserts & Ice-cream</h4>
+                        <p class="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">A visual and flavor trip inspired by the neon nights of Hong Kong.</p>
+                        <a href="main.html" class="text-accent hover:underline text-xs sm:text-sm font-medium">&gt; see more</a>
                     </div>
 
-                    <!-- Event 3: New menu testing -->
                     <div class="blog-card translate-y-10" data-scroll-anim="card-item">
-                        <img class="w-full h-48 object-cover mb-4" 
-                             src="hero_img\WhatsApp Image 2025-11-02 at 04.11.41_118e30c1.jpg"
-                             alt="New Menu" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/4B0082/FFFFFF?text=Image+Load+Error';"
+                        <img class="category-img"
+                             src="https://placehold.co/400x300/4B0082/FFFFFF?text=Paans"
+                             alt="Paans"
                         />
-                        <h4 class="text-xl font-semibold text-white mb-1">Paans</h4>
-                        <!-- <p class="text-sm text-gray-500 mb-3">Nov 30, 2024</p> -->
-                        <p class="text-gray-400 mb-4">A preview night of what's next—fresh drinks, honest feedback.</p>
-                        <a href="main.html" class="text-accent hover:underline text-sm font-medium">&gt; see more</a>
+                        <h4 class="text-lg sm:text-xl font-semibold text-white mb-1">Paans</h4>
+                        <p class="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">A preview night of what's next—fresh drinks, honest feedback.</p>
+                        <a href="main.html" class="text-accent hover:underline text-xs sm:text-sm font-medium">&gt; see more</a>
                     </div>
 
-                    <!-- Event 4: Banana week -->
                     <div class="blog-card translate-y-10" data-scroll-anim="card-item">
-                        <img class="w-full h-48 object-cover mb-4" 
-                             src="Images\WhatsApp Image 2025-11-02 at 02.50.12_3c477fd5.jpg" 
-                             alt="Bananas" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/FFD700/000000?text=Image+Load+Error';"
+                        <img class="category-img"
+                             src="https://placehold.co/400x300/FFD700/000000?text=Mocktails"
+                             alt="Mocktails"
                         />
-                        <h4 class="text-xl font-semibold text-white mb-1">Mocktails</h4>
-                        <!-- <p class="text-sm text-gray-500 mb-3">Nov 8, 2024</p> -->
-                        <p class="text-gray-400 mb-4">An unexpected, delightful twist on flavor, starring the humble banana.</p>
-                        <a href="main.html" class="text-accent hover:underline text-sm font-medium">&gt; see more</a>
+                        <h4 class="text-lg sm:text-xl font-semibold text-white mb-1">Mocktails</h4>
+                        <p class="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">An unexpected, delightful twist on flavor, starring the humble banana.</p>
+                        <a href="main.html" class="text-accent hover:underline text-xs sm:text-sm font-medium">&gt; see more</a>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        
-        <!-- 7. FOOTER / CONTACT (06// CONTACT) -->
-        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
-            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <p class="text-gray-600 font-light mb-16">06// CONTACT</p>
+        <!-- FOOTER -->
+        <footer id="contact" class="bg-primary-dark py-12 sm:py-16 md:py-24 lg:py-32 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto container-padding w-full">
+               
+                <div class="space-y-8 sm:space-y-10 md:space-y-12">
+                   
+                    <!-- Logo -->
+                    <div class="text-center sm:text-left">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-widest">THAKUR PAN</h1>
+                    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
-                    <!-- Column 1: Visit Us -->
-                    <div>
-                        <h3 class="text-3xl font-bold text-white mb-6">Visit us</h3>
-                        <div class="text-lg text-gray-400 space-y-3">
-                            <p class="font-medium text-white">Velvet Shaker</p>
-                            <p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p>
-                            
-                            <p class="font-medium text-white pt-4">Opening hours</p>
-                            <p>Mon-Fri: 18:00-24:00</p>
-                            <p>Sat-Sun: 16:00-late</p>
+                    <!-- Navigation Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+                       
+                        <!-- SITEMAP -->
+                        <div>
+                            <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">SITEMAP</h4>
+                            <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                                <a href="index.html" class="hover:text-accent block transition">&gt; home</a>
+                                <a href="About.html" class="hover:text-accent block transition">&gt; about</a>
+                                <a href="contact.html" class="hover:text-accent block transition">&gt; contact</a>
+                                <a href="main.html" class="hover:text-accent block transition">&gt; menu</a>
+                                <a href="Gallery.html" class="hover:text-accent block transition">&gt; gallery</a>
+                            </div>
+                        </div>
+
+                        <!-- LINKS -->
+                        <div>
+                            <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">LINKS</h4>
+                            <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                                <a href="#occasions" class="hover:text-accent block transition">&gt; faq</a>
+                                <a href="#happenings" class="hover:text-accent block transition">&gt; blog</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; privacy policy</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; accessibility</a>
+                            </div>
+                        </div>
+
+                        <!-- TEMPLATES -->
+                        <div>
+                            <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">TEMPLATES</h4>
+                            <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                                <a href="#" class="hover:text-accent block transition">&gt; all pages</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; style guide</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; licenses</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; buy template</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; our website</a>
+                            </div>
+                        </div>
+
+                        <!-- SOCIALS -->
+                        <div>
+                            <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">SOCIALS</h4>
+                            <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                                <a href="#" class="hover:text-accent block transition">&gt; Instagram</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; X (Twitter)</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; Facebook</a>
+                                <a href="#" class="hover:text-accent block transition">&gt; TikTok</a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Column 2: Contact -->
-                    <div>
-                        <h3 class="text-3xl font-bold text-white mb-6">Contact</h3>
-                        <div class="text-lg text-gray-400 space-y-3">
-                            <p class="font-medium text-white">Bookings</p>
-                            <a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a>
-
-                            <p class="font-medium text-white pt-4">Press</p>
-                            <a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a>
-
-                            <p class="font-medium text-white pt-4">Whatsapp</p>
-                            <a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a>
+                    <!-- Bottom Section -->
+                    <div class="border-t border-gray-800 pt-6 sm:pt-8 space-y-3 sm:space-y-4">
+                        <div class="text-center sm:text-left">
+                            <p class="text-gray-600 text-xs sm:text-sm">see all templates</p>
+                        </div>
+                       
+                        <!-- Copyright -->
+                        <div class="flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-gray-500 gap-2">
+                            <p>Template designed with love by Wavesdesign, powered by Framer</p>
+                            <p class="text-gray-600">&copy; 2025</p>
                         </div>
                     </div>
-
-                    <!-- Column 3: Socials -->
-                    <div>
-                        <h3 class="text-3xl font-bold text-white mb-6">Socials</h3>
-                        <div class="text-lg text-gray-400 space-y-3">
-                            <a href="#" class="hover:text-accent block">Instagram</a>
-                            <a href="#" class="hover:text-accent block">X (Twitter)</a>
-                            <a href="#" class="hover:text-accent block">Facebook</a>
-                            <a href="#" class="hover:text-accent block">TikTok</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Secondary Footer / Links Section -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
-                    <div>
-                        <h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4>
-                        <div class="text-lg text-gray-400 space-y-3">
-                            <a href="#" class="hover:text-accent block">&gt; home</a>
-                            <a href="#about" class="hover:text-accent block">&gt; about</a>
-                            <a href="#contact" class="hover:text-accent block">&gt; contact</a>
-                            <a href="#menu" class="hover:text-accent block">&gt; menu</a>
-                            <a href="#" class="hover:text-accent block">&gt; gallery</a>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-white mb-6">LINKS</h4>
-                         <div class="text-lg text-gray-400 space-y-3">
-                            <a href="#occasions" class="hover:text-accent block">&gt; faq</a>
-                            <a href="#happenings" class="hover:text-accent block">&gt; blog</a>
-                            <a href="#" class="hover:text-accent block">&gt; privacy policy</a>
-                            <a href="#" class="hover:text-accent block">&gt; accessibility</a>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4>
-                        <div class="text-lg text-gray-400 space-y-3">
-                            <a href="#" class="hover:text-accent block">&gt; all pages</a>
-                            <a href="#" class="hover:text-accent block">&gt; style guide</a>
-                            <a href="#" class="hover:text-accent block">&gt; licenses</a>
-                            <a href="#" class="hover:text-accent block">&gt; buy template</a>
-                            <a href="#" class="hover:text-accent block">&gt; our website</a>
-                        </div>
-                    </div>
-                     <!-- Logo on the fourth column on desktop, moved down on mobile -->
-                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full">
-                        <h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1>
-                        <p class="text-gray-600 text-sm">see all templates</p>
-                    </div>
-                </div>
-
-
-                <!-- Copyright and final links -->
-                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
-                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
-                    <p class="text-gray-600">&copy; 2025</p>
                 </div>
             </div>
         </footer>
 
     </main>
-    
-    <!-- Custom Cursor Element -->
+   
+    <!-- Custom Cursor -->
     <div id="custom-cursor" class="custom-cursor"></div>
-
     <script>
-        // Global variables for Firebase setup (required by system instructions, even if unused)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-
-        // --- Custom Cursor Logic (with LERP for smooth lag) ---
+        // Custom Cursor with LERP
         const customCursor = document.getElementById('custom-cursor');
         let mouseX = 0;
         let mouseY = 0;
@@ -534,9 +702,6 @@
         let currentY = 0;
         const easing = 0.2; 
 
-        /**
-         * Linear interpolation function (LERP) for smooth movement.
-         */
         function lerp(start, end, amount) {
             return (1 - amount) * start + amount * end;
         }
@@ -545,7 +710,6 @@
             currentX = lerp(currentX, mouseX, easing);
             currentY = lerp(currentY, mouseY, easing);
             
-            // Translate3d for hardware acceleration and centering
             customCursor.style.transform = `translate3d(${currentX - 15}px, ${currentY - 15}px, 0)`; 
             
             requestAnimationFrame(animateCursor);
@@ -556,7 +720,6 @@
             mouseY = e.clientY;
         });
 
-        // Add magnetic/enlarge effect to interactive elements
         document.querySelectorAll('a, button, .menu-item, .blog-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 customCursor.style.width = '60px'; 
@@ -572,72 +735,51 @@
 
         requestAnimationFrame(animateCursor);
 
-
-        // --- SCROLL ANIMATION LOGIC ---
-
-        /**
-         * Calculates the viewport progress of a given section.
-         * @param {HTMLElement} section The scroll-section element.
-         * @returns {number} Progress from 0 (start of scroll) to 1 (end of scroll).
-         */
+        // Scroll Animation Logic
         function getSectionProgress(section) {
             const viewportHeight = window.innerHeight;
             const sectionRect = section.getBoundingClientRect();
             const sectionHeight = section.offsetHeight;
             
-            // Total scroll distance needed to traverse the section
             const totalScrollDuration = sectionHeight - viewportHeight;
             if (totalScrollDuration <= 0) return 0; 
 
-            // sectionScrollDist is how far the top of the section has traveled above the viewport
             const sectionScrollDist = -sectionRect.top;
             
             let progress = sectionScrollDist / totalScrollDuration;
             return Math.max(0, Math.min(1, progress)); 
         }
 
-
-        /**
-         * Handles the animation for the ABOUT section (Sticky Text Fade + Image Scale).
-         */
         function handleAboutSection(progress) {
             const textElement = document.getElementById('about-text');
             const imageElement = document.getElementById('about-image');
             
-            // Text: Fades in and moves up from progress 0 to 0.1
             const textStart = 0.0;
             const textEnd = 0.1;
             const textRange = textEnd - textStart;
 
             const textProgress = Math.max(0, Math.min(1, (progress - textStart) / textRange));
             
-            const initialY = 32; // translate-y-8
+            const initialY = 32;
             const currentY = initialY * (1 - textProgress);
             const opacity = 0 + (1 * textProgress);
             
             textElement.style.transform = `translateY(${currentY}px)`;
             textElement.style.opacity = opacity;
 
-            // Image: Scales down and fades in from progress 0.1 to 1.0
             const imageStart = 0.1;
             const imageRange = 1.0 - imageStart;
             const imageProgress = Math.max(0, Math.min(1, (progress - imageStart) / imageRange));
             
             const initialScale = 1.1; 
-            const currentScale = initialScale - (initialScale - 1) * imageProgress; // Scales from 1.1 to 1
+            const currentScale = initialScale - (initialScale - 1) * imageProgress;
             
-            // Image should fade from 50% opacity (darkened) to 100% (full visibility)
             const imageOpacity = 0.5 + (0.5 * imageProgress); 
 
             imageElement.style.transform = `scale(${currentScale})`;
             imageElement.style.opacity = imageOpacity;
         }
 
-
-        /**
-         * Handles simple list and card item fade-in animations on entry.
-         * This uses a simple scroll check to trigger the animation once.
-         */
         function handleEntranceAnimations() {
             const elements = document.querySelectorAll('[data-scroll-anim]:not([data-animated="true"])');
             const viewportHeight = window.innerHeight;
@@ -645,28 +787,24 @@
             elements.forEach((el, index) => {
                 const rect = el.getBoundingClientRect();
                 
-                // Trigger if the element is 15% visible in the viewport
                 if (rect.top < viewportHeight * 0.85) {
                     
                     let delay = 0;
                     const animType = el.getAttribute('data-scroll-anim');
 
                     if (animType === 'list-item' || animType === 'card-item') {
-                        // Staggered delay logic for siblings
-                        const parent = el.closest('#menu-list , .grid');
+                        const parent = el.closest('#menu-list, .grid');
                         if (parent) {
                             const siblings = Array.from(parent.children).filter(child => child.getAttribute('data-scroll-anim') === animType);
                             const elementIndex = siblings.indexOf(el);
-                            delay = elementIndex * 70; // 70ms stagger
+                            delay = elementIndex * 70;
                         }
                     } else if (animType === 'list-item-delay') {
-                        // For the two-column story text, which appears after the title
                         const siblings = Array.from(el.parentElement.children).filter(child => child.getAttribute('data-scroll-anim') === animType);
                         const elementIndex = siblings.indexOf(el);
                         delay = 200 + elementIndex * 100;
                     }
 
-                    // Apply styles
                     setTimeout(() => {
                          el.style.opacity = '1';
                          el.style.transform = 'translateY(0)';
@@ -676,48 +814,54 @@
             });
         }
 
-
-        /**
-         * Main scroll handler combining all effects.
-         */
         function handleScroll() {
             const header = document.getElementById('header');
             
-            // Header Shrink Effect
             const heroHeight = window.innerHeight; 
             if (window.scrollY > heroHeight * 0.25) {
-                header.classList.remove('h-20', 'bg-primary-dark/80');
-                header.classList.add('h-16', 'bg-primary-dark'); 
+                header.classList.add('shadow-xl');
             } else {
-                header.classList.remove('h-16', 'bg-primary-dark');
-                header.classList.add('h-20', 'bg-primary-dark/80');
+                header.classList.remove('shadow-xl');
             }
             
-            // Parallax on Hero BG
             const heroBg = document.getElementById('hero-bg');
-            // Move background slower than foreground (scrollY / 3)
             heroBg.style.transform = `translateY(${window.scrollY * 0.3}px) scale(1.15)`;
 
-
-            // About Section Animations
             const aboutSection = document.getElementById('about');
             if (aboutSection) {
                 const progress = getSectionProgress(aboutSection);
                 handleAboutSection(progress);
             }
 
-            // List/Card Entrance Animations
             handleEntranceAnimations();
         }
 
-        // Initialize animations and attach listeners
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleScroll);
 
         window.onload = () => {
-             // Initial run of the scroll handler
              handleScroll();
         };
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
 
     </script>
 </body>
