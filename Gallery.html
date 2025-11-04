@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvet Shaker - Gallery</title>
+    <title>Thakur Pan & Soda - Gallery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0A0A0A; 
@@ -15,10 +22,12 @@
             cursor: none; 
             scroll-behavior: smooth;
         }
+        
         .text-hero {
             font-size: clamp(3rem, 11vw, 8.5rem); 
             line-height: 1.1;
         }
+        
         /* Custom Cursor Styling */
         .custom-cursor {
             pointer-events: none;
@@ -28,7 +37,7 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background-color: #B4A066; /* Accent color */
+            background-color: #B4A066;
             mix-blend-mode: soft-light; 
             z-index: 9999;
             opacity: 0.8;
@@ -36,240 +45,422 @@
                         height 0.3s cubic-bezier(0.19, 1, 0.22, 1),
                         opacity 0.3s ease-in-out;
         }
-        img {
-            border-radius: 0.75rem;
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.3s ease-in-out;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05); /* Subtle zoom on hover */
-            filter: brightness(0.9);
-        }
-
+        
         /* Base styles for scroll-animated elements */
         [data-scroll-anim] {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
-                        transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
+        
         .show { 
             opacity: 1 !important; 
             transform: translateY(0) !important;
         }
         
-        /* Specific gallery grid for responsive design */
-        .gallery-grid {
-            column-count: 1;
-            column-gap: 2rem;
-        }
-        @media (min-width: 768px) {
-            .gallery-grid {
-                column-count: 2;
-            }
-        }
-        @media (min-width: 1024px) {
-            .gallery-grid {
-                column-count: 3;
-            }
-        }
-        .gallery-item {
-            display: inline-block;
-            margin-bottom: 2rem;
+        /* Modern Bento Grid Gallery */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
             width: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
             overflow: hidden;
-            break-inside: avoid;
+            border-radius: 1rem;
+            background: #1a1a1a;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Bento Layout Patterns */
+        .span-4 { grid-column: span 4; }
+        .span-5 { grid-column: span 5; }
+        .span-6 { grid-column: span 6; }
+        .span-7 { grid-column: span 7; }
+        .span-8 { grid-column: span 8; }
+        .span-12 { grid-column: span 12; }
+
+        .h-sm { height: 250px; }
+        .h-md { height: 350px; }
+        .h-lg { height: 450px; }
+        .h-xl { height: 550px; }
+        .h-2xl { height: 650px; }
+
+        /* Hero Image */
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            opacity: 0.85;
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+        }
+
+        .hero-image-container.show img {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        #mobile-menu.active {
+            max-height: 500px;
+        }
+
+        .container-padding {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Responsive Typography */
+        @media (min-width: 1024px) {
+            .container-padding {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container-padding {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+            }
+            
+            .span-4, .span-5, .span-7 { grid-column: span 6; }
+            .span-8 { grid-column: span 12; }
+        }
+
+        @media (max-width: 767px) {
+            .container-padding {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { 
+                grid-column: span 1; 
+            }
+            
+            .h-sm { height: 200px; }
+            .h-md { height: 280px; }
+            .h-lg { height: 350px; }
+            .h-xl { height: 400px; }
+            .h-2xl { height: 450px; }
+            
+            .hero-image-container {
+                height: 60vh;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .custom-cursor {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+        }
+
+        .section-divider {
+            border-bottom: 1px solid #333333;
         }
     </style>
-</head>
-<body class="antialiased">
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         'primary-dark': '#0A0A0A',
-                        'accent': '#B4A066', /* Faux velvet/gold accent */
+                        'accent': '#B4A066',
                     }
                 }
             }
         }
     </script>
+</head>
+<body class="antialiased">
 
-   <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/80 backdrop-blur-sm shadow-lg h-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-            <a href="index.html" class="text-3xl font-bold text-white tracking-widest">VELVET SHAKER</a>
-            <nav class="space-x-4 flex items-center">
-                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium hidden sm:inline">home</a>
-                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">about</a>
-                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">contact</a>
-                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">menu</a>
-                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-lg font-medium">gallery</a>
+    <!-- Header/Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary-dark/90 backdrop-blur-md shadow-lg">
+        <div class="max-w-7xl mx-auto container-padding h-20 lg:h-20 flex items-center justify-between">
+            <a href="index.html" class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-widest">THAKUR PAN</a>
+           
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">home</a>
+                <a href="About.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">about</a>
+                <a href="contact.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">contact</a>
+                <a href="main.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">menu</a>
+                <a href="Gallery.html" class="text-gray-300 hover:text-accent transition duration-150 text-base font-medium">gallery</a>
             </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none z-50">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="lg:hidden bg-primary-dark/95 backdrop-blur-lg border-t border-gray-800">
+            <div class="container-padding py-6 space-y-1">
+                <a href="index.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">home</a>
+                <a href="About.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">about</a>
+                <a href="contact.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">contact</a>
+                <a href="main.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">menu</a>
+                <a href="Gallery.html" class="block text-gray-300 hover:text-accent transition duration-150 text-lg sm:text-xl font-medium py-3">gallery</a>
+            </div>
+        </nav>
     </header>
 
-    <section class="min-h-screen pt-24 pb-24 section-divider">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- Increased gap for the intro paragraphs -->
-            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
-                <p class="text-lg text-text-primary animate-on-scroll">
-                    Nestled in the heart of Hong Kong, Velvet Shaker is more than just a bar—it’s a sensory journey.
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-32 pb-16 md:pt-40 md:pb-24">
+        <div class="max-w-7xl mx-auto container-padding">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-white mb-8 md:mb-12" data-scroll-anim>
+                Good Vibes<br>& Great Drinks
+            </h1>
+            
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-20">
+                <p class="text-base md:text-lg text-gray-300" data-scroll-anim>
+                    Nestled in the heart of Hong Kong, Velvet Shaker is more than just a bar—it's a sensory journey through taste and ambiance.
                 </p>
-                <p class="text-lg text-text-primary animate-on-scroll" data-delay="100">
-                    Inspired by the city’s vibrant energy and global influences, this upscale cocktail haven combines modern design with a cozy, intimate atmosphere.
+                <p class="text-base md:text-lg text-gray-300" data-scroll-anim>
+                    Every corner tells a story. Every drink is an experience. Explore our space through these moments captured in time.
                 </p>
             </div> -->
-
-            <!-- Tighter tracking and higher weight for display font fidelity -->
-            <h1 class="text-6xl sm:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200">
-                Good Vibes & Great Drinks
-            </h1>
-
         </div>
     </section>
 
-    <main class="pt-20 bg-primary-dark">
-        
-        <div class="mt-20 relative w-full h-[150vh] md:h-[150vh] overflow-hidden  shadow-2xl">
-                         <img id="about-image"
-                             data-scroll-anim="scale-down-fade"
-                             class="absolute w-full h-full object-cover transform scale-110 opacity-50"
-                             src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyGDv_LF22uRO9clf9aXMimi0s_XZZTlqPmfcR3ye_L4V_Cn3XbPpts7mRU8cTbTT2BDcM6rgi-nNgm-3rTOVVnae7aeBzB84-NSuUHBXcrl2VBICJfC6ezZxXGfm_-ez_ELC6P=s1360-w1360-h1020-rw?scale-down-to=2048"
-                             alt="Bar Interior"
-                             onerror="this.onerror=null;this.src='https://placehold.co/1200x800/2c2c2c/ffffff?text=Image+Load+Error';"
-                        />
-                    </div>
+    <!-- Hero Image -->
+    <div class="max-w-7xl mx-auto container-padding mb-24">
+        <div class="hero-image-container" data-scroll-anim>
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyGDv_LF22uRO9clf9aXMimi0s_XZZTlqPmfcR3ye_L4V_Cn3XbPpts7mRU8cTbTT2BDcM6rgi-nNgm-3rTOVVnae7aeBzB84-NSuUHBXcrl2VBICJfC6ezZxXGfm_-ez_ELC6P=s1360-w1360-h1020-rw"
+                 alt="Velvet Shaker Bar Interior"
+                 onerror="this.src='https://placehold.co/1600x1000/1a1a1a/B4A066?text=Bar+Interior';">
+        </div>
+    </div>
 
-        <section class="py-20">
-            <div class="max-w-7xl mx-auto px-6 sm:px-12">
-                <div class="gallery-grid">
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx3oUA-gwvnho5gvDd5rQylkvZ-c3MyYNT6wWP0TPKseZIKLXkmNGR6JvxaUzIvxdZhsy0hN1KOMGjgYwh2GR1jTNRBY33x-s34VqadR1G2_l3VMSAxUaCNUuSzR025ijnDrWAt=s1360-w1360-h1020-rw" alt="Bar Interior" style="height: 500px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x1200/2c2c2c/ffffff?text=Bar+Setup'; this.style.height='500px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzeYcyPePSlyl36d1DZq69Y_1mn2lZus8uTNdt1oEzOvgrtcJsNlYu_MCI9OKHfcMsz5BAfYWAEbvSLW8UpYjXTZhPH75_SURif3bcBnKilNV-crOTR0CpJMXbCOIOb3lWSUqr7oQ=s1360-w1360-h1020-rw" alt="Seating Area" style="height: 350px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Cozy+Seating'; this.style.height='350px';"/>
-                    </div>
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxIjTG4Ax-WxBTiL91jsS3pnPxhk4kSUEKfLn0MTZ9Z9u7H7ll4u6_O_f9KOEnOKT-uWsJUPacvCOYEejEc19RvH10jz8_Di6tEBRFkM3n0uDGm3tyo53tGhvZfZy9T2jRFw6PaZA=s1360-w1360-h1020-rw" alt="Cocktail Close-up" style="height: 300px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Signature+Drink'; this.style.height='300px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzpJjIhSWwJj4rJjavvoSfZhSVw9uVIJolTuA_jNvZDTDrbvhLznDblzM-vrug8fCbXBLS5DVNGPvKGROG0GepYBKacsTyQ6uBmgCmT7RSXUqBWGxCGDcWpDDhTsbI4_FWAGqNn-Q=s1360-w1360-h1020-rw" alt="Mixologist" style="height: 450px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
-                    </div>
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxBipWFyD2w-mPgsZeYpUHEf2turSh9_uhi2U_nS_tj035XKrTJyPHGp4ZB5o_SeIjSJkZWzLcIrTTyA8djYEShG16oWPaIHIeWq-wHw7wYp0aoEYmzSsy-y1ucjc-sFhX6Y4s=s1360-w1360-h1020-rw" alt="Table Setting" style="height: 350px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxMk_eYEipqG9lvWsmPbYx87LW3KKBUA7z5lTlspzZTbNG3Ur4mvH_28CZ2FElYiXF3Lo0SlKg41J-3FTpoi_tnbbC07tflCfMjz-qMjeyFYWRiOJNEwrM7YSBBGbf_zr0jWQb8IA=s1360-w1360-h1020-rw" alt="Bar Shelf" style="height: 300px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwZMWlaqqBiIoDigkbLXiwEzmslvOOV7x50FtT3A4Xd7eih06jnOUTKAltBpd8krvc3Qwn9laoy7EtJWHr4rxgVtGVhWROZn_hoxljWhQPwI1qY0vyKdN6WsoP66_36K5HNxJi6YA=s1360-w1360-h1020-rw" alt="VIP Area" style="height: 250px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
-                    </div>
-
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx3oUA-gwvnho5gvDd5rQylkvZ-c3MyYNT6wWP0TPKseZIKLXkmNGR6JvxaUzIvxdZhsy0hN1KOMGjgYwh2GR1jTNRBY33x-s34VqadR1G2_l3VMSAxUaCNUuSzR025ijnDrWAt=s1360-w1360-h1020-rw" alt="Bar Interior" style="height: 500px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x1200/2c2c2c/ffffff?text=Bar+Setup'; this.style.height='500px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_7f8d210f.jpg" alt="Seating Area" style="height: 350px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Cozy+Seating'; this.style.height='350px';"/>
-                    </div>
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_61862279.jpg" alt="Cocktail Close-up" style="height: 300px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Signature+Drink'; this.style.height='300px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.10_c956bb5d.jpg" alt="Mixologist" style="height: 450px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
-                    </div>
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_0fa7f492.jpg" alt="Table Setting" style="height: 350px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_567e2bfd.jpg" alt="Bar Shelf" style="height: 300px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.11_186716be.jpg" alt="VIP Area" style="height: 250px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
-                    </div>
-
-                     <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_3c477fd5.jpg" alt="Mixologist" style="height: 450px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x1100/2c2c2c/ffffff?text=Mixologist+at+Work'; this.style.height='450px';"/>
-                    </div>
-
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_14dff4bb.jpg" alt="Table Setting" style="height: 350px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/2c2c2c/ffffff?text=Table+Setting'; this.style.height='350px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_88ac0679.jpg" alt="Bar Shelf" style="height: 300px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/2c2c2c/ffffff?text=Bar+Shelf'; this.style.height='300px';"/>
-                    </div>
-                    
-                    <div class="gallery-item" data-scroll-anim>
-                        <img src="Images\WhatsApp Image 2025-11-02 at 02.50.12_4370b320.jpg" alt="VIP Area" style="height: 250px;" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x500/2c2c2c/ffffff?text=VIP+Area'; this.style.height='250px';"/>
-                    </div>
-                    
-                    <div class="gallery-item text-4xl sm:text-8xl lg:text-7xl font-extrabold tracking-tighter leading-none text-text-primary mt-12 animate-on-scroll hero-title" data-delay="200" data-scroll-anim>
-                        <p> (view more..)</p>    
-                    </div>
-  
+    <!-- Gallery Section -->
+    <main class="py-12 md:py-20 bg-primary-dark">
+        <div class="max-w-7xl mx-auto container-padding">
+            
+            <!-- Gallery Grid 1 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-7 h-xl">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx3oUA-gwvnho5gvDd5rQylkvZ-c3MyYNT6wWP0TPKseZIKLXkmNGR6JvxaUzIvxdZhsy0hN1KOMGjgYwh2GR1jTNRBY33x-s34VqadR1G2_l3VMSAxUaCNUuSzR025ijnDrWAt=s1360-w1360-h1020-rw" 
+                         alt="Bar Setup"
+                         onerror="this.src='https://placehold.co/800x600/1a1a1a/B4A066?text=Bar+Setup';">
+                </div>
+                <div class="gallery-item span-5 h-xl">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzeYcyPePSlyl36d1DZq69Y_1mn2lZus8uTNdt1oEzOvgrtcJsNlYu_MCI9OKHfcMsz5BAfYWAEbvSLW8UpYjXTZhPH75_SURif3bcBnKilNV-crOTR0CpJMXbCOIOb3lWSUqr7oQ=s1360-w1360-h1020-rw" 
+                         alt="Seating Area"
+                         onerror="this.src='https://placehold.co/600x800/1a1a1a/B4A066?text=Seating';">
                 </div>
             </div>
-        </section>
 
-        <footer id="contact" class="bg-primary-dark py-32 border-t border-gray-800">
-            <div class="max-w-6xl mx-auto px-6 sm:px-12 w-full">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
-                    <div><h3 class="text-3xl font-bold text-white mb-6">Visit us</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Velvet Shaker</p><p>8F, 22 Wyndham Street, Lan Kwai Fong, Central, Hong Kong</p><p class="font-medium text-white pt-4">Opening hours</p><p>Mon-Fri: 18:00-24:00</p><p>Sat-Sun: 16:00-late</p></div></div>
-                    <div><h3 class="text-3xl font-bold text-white mb-6">Contact</h3><div class="text-lg text-gray-400 space-y-3"><p class="font-medium text-white">Bookings</p><a href="mailto:bookings@velvethk.com" class="hover:text-accent">bookings@velvethk.com</a><p class="font-medium text-white pt-4">Press</p><a href="mailto:press@velvethk.com" class="hover:text-accent">press@velvethk.com</a><p class="font-medium text-white pt-4">Whatsapp</p><a href="tel:+85212345678" class="hover:text-accent">+852 1234 5678</a></div></div>
-                    <div><h3 class="text-3xl font-bold text-white mb-6">Socials</h3><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">Instagram</a><a href="#" class="hover:text-accent block">X (Twitter)</a><a href="#" class="hover:text-accent block">Facebook</a><a href="#" class="hover:text-accent block">TikTok</a></div></div>
+            <!-- Gallery Grid 2 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-4 h-md">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxIjTG4Ax-WxBTiL91jsS3pnPxhk4kSUEKfLn0MTZ9Z9u7H7ll4u6_O_f9KOEnOKT-uWsJUPacvCOYEejEc19RvH10jz8_Di6tEBRFkM3n0uDGm3tyo53tGhvZfZy9T2jRFw6PaZA=s1360-w1360-h1020-rw" 
+                         alt="Cocktail Detail"
+                         onerror="this.src='https://placehold.co/500x600/1a1a1a/B4A066?text=Cocktail';">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-gray-800 pt-16">
-                    <div><h4 class="text-xl font-bold text-white mb-6">SITEMAP</h4><div class="text-lg text-gray-400 space-y-3"><a href="index.html" class="hover:text-accent block">&gt; home</a><a href="about.html" class="hover:text-accent block">&gt; about</a><a href="contact.html" class="hover:text-accent block">&gt; contact</a><a href="#menu" class="hover:text-accent block">&gt; menu</a><a href="gallery.html" class="hover:text-accent block">&gt; gallery</a></div></div>
-                    <div><h4 class="text-xl font-bold text-white mb-6">LINKS</h4><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">&gt; faq</a><a href="#" class="hover:text-accent block">&gt; blog</a><a href="#" class="hover:text-accent block">&gt; privacy policy</a><a href="#" class="hover:text-accent block">&gt; accessibility</a></div></div>
-                    <div><h4 class="text-xl font-bold text-white mb-6">TEMPLATES</h4><div class="text-lg text-gray-400 space-y-3"><a href="#" class="hover:text-accent block">&gt; all pages</a><a href="#" class="hover:text-accent block">&gt; style guide</a><a href="#" class="hover:text-accent block">&gt; licenses</a><a href="#" class="hover:text-accent block">&gt; buy template</a><a href="#" class="hover:text-accent block">&gt; our website</a></div></div>
-                    <div class="mt-8 lg:mt-0 flex flex-col justify-between h-full"><h1 class="text-4xl font-bold text-white tracking-widest mb-4">VELVET SHAKER</h1><p class="text-gray-600 text-sm">see all templates</p></div>
-                </div>
-                <div class="mt-20 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
-                    <p class="mb-4 md:mb-0">Template designed with love by Wavesdesign, powered by Framer</p>
-                    <p class="text-gray-600">&copy; 2025</p>
+                <div class="gallery-item span-8 h-md">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzpJjIhSWwJj4rJjavvoSfZhSVw9uVIJolTuA_jNvZDTDrbvhLznDblzM-vrug8fCbXBLS5DVNGPvKGROG0GepYBKacsTyQ6uBmgCmT7RSXUqBWGxCGDcWpDDhTsbI4_FWAGqNn-Q=s1360-w1360-h1020-rw" 
+                         alt="Mixologist at Work"
+                         onerror="this.src='https://placehold.co/1000x600/1a1a1a/B4A066?text=Mixologist';">
                 </div>
             </div>
-        </footer>
 
+            <!-- Gallery Grid 3 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-6 h-lg">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxBipWFyD2w-mPgsZeYpUHEf2turSh9_uhi2U_nS_tj035XKrTJyPHGp4ZB5o_SeIjSJkZWzLcIrTTyA8djYEShG16oWPaIHIeWq-wHw7wYp0aoEYmzSsy-y1ucjc-sFhX6Y4s=s1360-w1360-h1020-rw" 
+                         alt="Table Setting"
+                         onerror="this.src='https://placehold.co/700x800/1a1a1a/B4A066?text=Table+Setting';">
+                </div>
+                <div class="gallery-item span-6 h-lg">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxMk_eYEipqG9lvWsmPbYx87LW3KKBUA7z5lTlspzZTbNG3Ur4mvH_28CZ2FElYiXF3Lo0SlKg41J-3FTpoi_tnbbC07tflCfMjz-qMjeyFYWRiOJNEwrM7YSBBGbf_zr0jWQb8IA=s1360-w1360-h1020-rw" 
+                         alt="Bar Shelf"
+                         onerror="this.src='https://placehold.co/700x800/1a1a1a/B4A066?text=Bar+Shelf';">
+                </div>
+            </div>
+
+            <!-- Gallery Grid 4 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-5 h-sm">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwZMWlaqqBiIoDigkbLXiwEzmslvOOV7x50FtT3A4Xd7eih06jnOUTKAltBpd8krvc3Qwn9laoy7EtJWHr4rxgVtGVhWROZn_hoxljWhQPwI1qY0vyKdN6WsoP66_36K5HNxJi6YA=s1360-w1360-h1020-rw" 
+                         alt="VIP Area"
+                         onerror="this.src='https://placehold.co/600x400/1a1a1a/B4A066?text=VIP+Area';">
+                </div>
+                <div class="gallery-item span-7 h-sm">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.10_7f8d210f.jpg" 
+                         alt="Interior View"
+                         onerror="this.src='https://placehold.co/800x400/1a1a1a/B4A066?text=Interior';">
+                </div>
+            </div>
+
+            <!-- Gallery Grid 5 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-12 h-2xl">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.10_61862279.jpg" 
+                         alt="Panoramic Bar View"
+                         onerror="this.src='https://placehold.co/1600x800/1a1a1a/B4A066?text=Panoramic+View';">
+                </div>
+            </div>
+
+            <!-- Gallery Grid 6 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-4 h-lg">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.10_c956bb5d.jpg" 
+                         alt="Drink Detail"
+                         onerror="this.src='https://placehold.co/500x800/1a1a1a/B4A066?text=Drink';">
+                </div>
+                <div class="gallery-item span-4 h-lg">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.11_0fa7f492.jpg" 
+                         alt="Ambiance"
+                         onerror="this.src='https://placehold.co/500x800/1a1a1a/B4A066?text=Ambiance';">
+                </div>
+                <div class="gallery-item span-4 h-lg">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.11_567e2bfd.jpg" 
+                         alt="Details"
+                         onerror="this.src='https://placehold.co/500x800/1a1a1a/B4A066?text=Details';">
+                </div>
+            </div>
+
+            <!-- Gallery Grid 7 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-8 h-xl">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.11_186716be.jpg" 
+                         alt="Bar Counter"
+                         onerror="this.src='https://placehold.co/1000x700/1a1a1a/B4A066?text=Bar+Counter';">
+                </div>
+                <div class="gallery-item span-4 h-xl">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.12_3c477fd5.jpg" 
+                         alt="Signature Drink"
+                         onerror="this.src='https://placehold.co/500x700/1a1a1a/B4A066?text=Signature';">
+                </div>
+            </div>
+
+            <!-- Gallery Grid 8 -->
+            <div class="gallery-container mb-6" data-scroll-anim>
+                <div class="gallery-item span-6 h-md">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.12_14dff4bb.jpg" 
+                         alt="Evening Mood"
+                         onerror="this.src='https://placehold.co/700x600/1a1a1a/B4A066?text=Evening';">
+                </div>
+                <div class="gallery-item span-6 h-md">
+                    <img src="Images/WhatsApp Image 2025-11-02 at 02.50.12_88ac0679.jpg" 
+                         alt="Crafted Cocktails"
+                         onerror="this.src='https://placehold.co/700x600/1a1a1a/B4A066?text=Cocktails';">
+                </div>
+            </div>
+
+            <!-- View More Text -->
+            <div class="text-center mt-20 mb-12" data-scroll-anim>
+                <p class="text-4xl sm:text-6xl md:text-7xl font-bold text-gray-600 tracking-tight">(view more..)</p>
+            </div>
+
+        </div>
     </main>
-    
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-primary-dark py-12 sm:py-16 md:py-24 lg:py-32 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto container-padding w-full">
+            <div class="space-y-8 sm:space-y-10 md:space-y-12">
+                <div class="text-center sm:text-left">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-widest">THAKUR PAN</h1>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+                    <div>
+                        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">SITEMAP</h4>
+                        <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                            <a href="index.html" class="hover:text-accent block transition">&gt; home</a>
+                            <a href="About.html" class="hover:text-accent block transition">&gt; about</a>
+                            <a href="contact.html" class="hover:text-accent block transition">&gt; contact</a>
+                            <a href="main.html" class="hover:text-accent block transition">&gt; menu</a>
+                            <a href="Gallery.html" class="hover:text-accent block transition">&gt; gallery</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">LINKS</h4>
+                        <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                            <a href="#" class="hover:text-accent block transition">&gt; faq</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; blog</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; privacy policy</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; accessibility</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">TEMPLATES</h4>
+                        <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                            <a href="#" class="hover:text-accent block transition">&gt; all pages</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; style guide</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; licenses</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; buy template</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; our website</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-base sm:text-lg md:text-xl font-bold text-white mb-3 sm:mb-4">SOCIALS</h4>
+                        <div class="text-sm sm:text-base text-gray-400 space-y-2">
+                            <a href="#" class="hover:text-accent block transition">&gt; Instagram</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; X (Twitter)</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; Facebook</a>
+                            <a href="#" class="hover:text-accent block transition">&gt; TikTok</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-800 pt-6 sm:pt-8 space-y-3 sm:space-y-4">
+                    <div class="text-center sm:text-left">
+                        <p class="text-gray-600 text-xs sm:text-sm">see all templates</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-gray-500 gap-2">
+                        <p>Template designed with love by Wavesdesign, powered by Framer</p>
+                        <p class="text-gray-600">&copy; 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <div id="custom-cursor" class="custom-cursor"></div>
 
     <script>
